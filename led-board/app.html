@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LZI 燈牌機 1.0 試用版</title>
+<meta name="robots" content="noindex"><link rel="icon" href="/img/favicon.png">
+<style>
+:root{
+  --ink:#111111; --paper:#F2EFE6; --card:#FFFFFF; --signal:#F0B429; --gray:#8B8F98; --line:#DDD8CC;
+  --serif:"Songti TC","Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+  --sans:"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+  --latin:"Avenir Next","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);font:14px/1.5 var(--sans)}
+header{height:60px;display:flex;align-items:center;gap:16px;padding:0 20px;border-bottom:1px solid var(--line);background:var(--paper)}
+.logo{font:800 20px/1 var(--latin);letter-spacing:.02em}
+.logo b{display:inline-block;background:var(--ink);color:var(--paper);padding:4px 6px;margin-right:6px}
+.pname{font:700 18px/1 var(--serif)}
+.tag{color:var(--gray);font-size:13px}
+.trial{background:var(--signal);color:var(--ink);font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px}
+header .spacer{flex:1}
+button{font:inherit;cursor:pointer;border:1px solid var(--ink);background:var(--card);color:var(--ink);border-radius:6px;padding:8px 12px}
+button:hover{background:#faf8f2}
+button.primary{background:var(--ink);color:var(--paper)}
+button.primary:hover{background:#2a2a2a}
+button:disabled{opacity:.35;cursor:not-allowed}
+.app{display:flex;height:calc(100% - 60px)}
+main{flex:1;min-width:0;position:relative;display:flex;align-items:center;justify-content:center;padding:28px}
+#view{max-width:100%;max-height:100%;box-shadow:0 12px 40px rgba(0,0,0,.18);
+  background:repeating-conic-gradient(#e6e2d8 0 25%,#fff 0 50%) 0 0/18px 18px;display:none}
+#view.pan{cursor:grab}
+#view.dragging{cursor:grabbing}
+#empty{text-align:center;border:2px dashed #c9c3b5;border-radius:16px;padding:56px 48px;background:rgba(255,255,255,.5)}
+#empty h2{font:700 28px/1.3 var(--serif);margin:0 0 8px}
+#empty p{color:var(--gray);margin:0 0 22px}
+#empty .btns{display:flex;gap:10px;justify-content:center}
+main.over #empty,main.over #view{outline:3px solid var(--signal);outline-offset:6px}
+#stats{position:absolute;bottom:8px;right:14px;color:var(--gray);font-size:12px}
+#toast{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:8px 14px;border-radius:6px;font-size:13px;display:none;z-index:5}
+aside{width:380px;flex:none;overflow:auto;border-left:1px solid var(--line);background:var(--card);padding:6px 20px 30px}
+aside.off section,aside.off details{opacity:.35;pointer-events:none}
+section{padding:16px 0;border-bottom:1px solid var(--line)}
+h3{font:700 16px/1.2 var(--serif);margin:0 0 12px;display:flex;align-items:center;gap:8px}
+h3 .n{font:800 12px/1 var(--latin);background:var(--signal);border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center}
+.styles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.style{border:2px solid transparent;border-radius:8px;padding:4px;background:none;text-align:center;font-size:12px}
+.style canvas{width:100%;display:block;border-radius:4px;background:#eee}
+.style.on{border-color:var(--signal);background:#fff8e6}
+.style span{display:block;margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border-radius:999px;padding:6px 12px;font-size:13px;border-color:#cfc9bb}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.note{color:var(--gray);font-size:12px;margin:8px 0 0}
+.row{display:grid;grid-template-columns:70px 1fr 44px;align-items:center;gap:8px;margin:6px 0}
+.row output{text-align:right;color:var(--gray);font-variant-numeric:tabular-nums;font-size:12px}
+.field{display:block;margin:8px 0}
+.field span{display:block;font-size:12px;color:var(--gray);margin-bottom:4px}
+input[type=range]{width:100%;accent-color:var(--ink)}
+input[type=text],textarea{width:100%;font:inherit;padding:8px 10px;border:1px solid #cfc9bb;border-radius:6px;background:#fff}
+textarea{min-height:76px;resize:vertical;font-size:16px}
+#posterFields input{margin-top:6px}
+.exports{display:grid;gap:8px}
+.exports button{padding:11px;font-weight:600;text-align:left;display:flex;justify-content:space-between}
+.exports small{color:inherit;opacity:.6;font-weight:400}
+details{padding:14px 0}
+summary{cursor:pointer;font:700 15px var(--serif)}
+.colors{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+input[type=color]{width:100%;height:30px;border:1px solid #cfc9bb;border-radius:6px;padding:2px;background:#fff}
+select{width:100%;font:inherit;padding:6px;border-radius:6px;border:1px solid #cfc9bb;background:#fff}
+label.chk{display:flex;gap:6px;align-items:center;margin-top:8px;font-size:13px}
+.hide{display:none!important}
+@media (max-width:900px){
+  .app{flex-direction:column;height:auto}
+  main{height:60vh;padding:16px}
+  aside{width:100%;border-left:0;border-top:1px solid var(--line)}
+  header .tag{display:none}
+}
+
+</style>
+</head>
+<body><div id="lziBar" style="position:sticky;top:0;z-index:9999;display:flex;gap:10px;align-items:center;justify-content:space-between;background:#111;color:#F2EFE6;font:600 13px/1.3 -apple-system,PingFang TC,sans-serif;padding:8px 14px"><a href="/" style="color:#F2EFE6;text-decoration:none">← 全部工具</a><a href="https://portaly.cc/lzilabtools/product/HEZhXPU53VEwsB2gBcwc" rel="noopener" style="background:#F0B429;color:#111;text-decoration:none;padding:6px 12px;border-radius:99px;white-space:nowrap">完整版・無浮水印 →</a></div>
+<header>
+  <div class="logo"><b>LZI</b>LAB</div>
+  <div class="pname" id="pname"></div>
+  <div class="tag" id="ptag"></div>
+  <span class="trial hide" id="trialBadge">試用版</span>
+  <div class="spacer"></div>
+  <button id="openBtn2" class="hide">換一張照片</button>
+</header>
+
+<div class="app">
+  <main id="stage">
+    <div id="empty">
+      <h2>把照片或影片拖進來</h2>
+      <p>也可以按 ⌘V／Ctrl+V 直接貼上</p>
+      <div class="btns">
+        <button class="primary" id="openBtn">選擇照片／影片</button>
+        <button id="demoBtn">先用範例圖試試</button>
+      </div>
+    </div>
+    <canvas id="view"></canvas>
+    <div id="toast"></div>
+    <div id="stats"></div>
+    <input type="file" id="file" accept="image/*,video/*" hidden>
+  </main>
+
+  <aside id="panel" class="off">
+    <section id="mainSec" class="hide">
+      <h3><span class="n"></span><span id="mainTitle"></span></h3>
+      <div id="mainCtl"></div>
+    </section>
+
+    <section>
+      <h3><span class="n"></span>選一個風格</h3>
+      <div class="styles" id="styles"></div>
+    </section>
+
+    <section>
+      <h3><span class="n"></span>用在哪裡</h3>
+      <div class="chips" id="formats"></div>
+      <div id="posterFields" class="hide">
+        <input type="text" id="title" placeholder="海報標題">
+        <input type="text" id="subtitle" placeholder="副標題">
+      </div>
+      <div class="row" id="zoomRow"><span>放大</span><input type="range" id="zoom" min="1" max="3" step="0.01" value="1"><output id="zoomOut">1.00</output></div>
+      <p class="note" id="formatNote"></p>
+    </section>
+
+    <section id="motionSec">
+      <h3><span class="n"></span><span id="motionTitle">加一點動態（選用）</span></h3>
+      <div class="chips" id="motions"></div>
+      <p class="note" id="motionNote">選了動態效果，就能下載成影片，適合 Reels 和限動。</p>
+    </section>
+
+    <section>
+      <h3><span class="n"></span>下載</h3>
+      <div class="exports">
+        <button class="primary" id="pngBtn">下載圖片 <small id="pngInfo">PNG</small></button>
+        <button id="svgBtn" class="hide">下載向量檔 <small>SVG・可印刷、雷雕</small></button>
+        <button id="txtBtn" class="hide">下載文字檔 <small>TXT・可貼到任何地方</small></button>
+        <button id="mp4Btn">下載影片 <small id="mp4Info">MP4</small></button>
+      </div>
+      <p class="note hide" id="trialNote"></p>
+    </section>
+
+    <details id="adv">
+      <summary>進階調整</summary>
+      <div id="advCtl"></div>
+    </details>
+  </aside>
+</div>
+
+
+<script>
+const e=!0,t=(()=>{const e=document.createElement("canvas"),t=e.getContext("2d",{willReadFrequently:!0}),n=document.createElement("canvas"),o=n.getContext("2d"),a=(e,t)=>{const n=43758.5453*Math.sin(12.9898*e+78.233*t);return n-Math.floor(n)};function i(n,o,i){const l=o.cols,r=n.w/l,s=Math.max(1,Math.round(n.h/r)),c=new Float32Array(l*s*4),d=i.t||0,m=i.motion,p="photo"===o.content?i.sample(l,s):null,u=(e=>{const t=parseInt(e.slice(1),16);return[t>>16,t>>8&255,255&t]})(o.fg);if(p){const e=i.levels(p),t=p.data,n=Math.max(-.95,Math.min(.95,o.contrast/100)),a="marquee"===m?Math.floor(d*o.speed*l/10):0;for(let i=0;i<s;i++)for(let r=0;r<l;r++){const s=4*(i*l+((r+a)%l+l)%l),d=4*(i*l+r),m=e(t[s]),p=e(t[s+1]),f=e(t[s+2]);let h=.299*m+.587*p+.114*f;h=Math.pow(Math.min(1,Math.max(0,(h-.5)*(1+n)/(1-n)+.5)),1/o.gamma),o.invert&&(h=1-h),c[d]=h,"rgb"===o.colorMode?(c[d+1]=255*m,c[d+2]=255*p,c[d+3]=255*f):(c[d+1]=u[0],c[d+2]=u[1],c[d+3]=u[2])}}else{const n=(o.text||" ").split("\n").slice(0,4);let a=Math.max(5,Math.floor(s/n.length*.72));e.width=l,e.height=s,t.clearRect(0,0,l,s);const i=e=>`900 ${e}px "PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif`;t.font=i(a);let r=n.map((e=>t.measureText(e).width)),p=Math.max(...r);const f="marquee"===m;!f&&p>.92*l&&(a=Math.max(4,Math.floor(a*l*.92/p)),t.font=i(a),r=n.map((e=>t.measureText(e).width)),p=Math.max(...r)),t.textBaseline="middle",t.fillStyle="#fff";const h=p+Math.max(.35*l,1.5*a),g=f?.06*l-d*o.speed*l/6%h:0;n.forEach(((e,o)=>{const a=s*(o+.5)/n.length;if(f)for(let n=g;n<l;n+=h)t.fillText(e,n,a);else t.fillText(e,(l-r[o])/2,a)}));const y=t.getImageData(0,0,l,s).data;for(let e=0,t=0;e<y.length;e+=4,t+=4)c[t]=y[e+3]/255>.45?1:0,c[t+1]=u[0],c[t+2]=u[1],c[t+3]=u[2];if("rgb"===o.colorMode)for(let e=0;e<s;e++)for(let t=0;t<l;t++){const n=4*(e*l+t),o=(t/l+.15*d)%1,a=e=>{const t=(e+6*o)%6;return 255*(1-Math.max(0,Math.min(t,4-t,1)))};c[n+1]=a(5),c[n+2]=a(3),c[n+3]=a(1)}}if("flicker"===m||"scan"===m||"pulse"===m)for(let e=0;e<s;e++)for(let t=0;t<l;t++){const n=4*(e*l+t);if("flicker"===m&&(c[n]*=a(t+31*Math.floor(10*d),e)<.08?.15:1),"scan"===m){const t=8*(e/s-d%2/2);c[n]*=.55+.9*Math.exp(-t*t)}"pulse"===m&&(c[n]*=.6+.4*(.5+.5*Math.sin(Math.PI*d)))}return{out:c,cols:l,rows:s,cell:r}}function l(e,t){const n=[],{out:o,cols:a,rows:i,cell:l}=e;for(let e=0;e<i;e++)for(let t=0;t<a;t++){const i=4*(e*a+t),l=Math.min(1,o[i]);n.push({x:t,y:e,v:l,r:o[i+1],g:o[i+2],b:o[i+3]})}return n}return{name:"燈牌機",tagline:"打字或照片，秒變 LED 燈牌",needsSource:!1,acceptsSource:!0,onSource:e=>{e.content="photo"},formats:["story","post","square","poster","print"],defaultFormat:"square",mainTitle:"輸入文字或上傳照片",keep:["text","content"],previewAnimated:1e3,BASE:{content:"text",text:"營業中\nOPEN",cols:64,shape:"round",size:.78,glow:.8,off:.1,colorMode:"mono",fg:"#FF2A2A",bg:"#0A0606",speed:1,invert:!1,contrast:20,gamma:1,transparent:!1},STYLES:[{name:"紅色跑馬燈",p:{fg:"#FF2A2A",bg:"#0A0606"}},{name:"琥珀燈",p:{fg:"#FFB000",bg:"#0B0804"}},{name:"綠色看板",p:{fg:"#3BFF6E",bg:"#040A06"}},{name:"冰藍",p:{fg:"#4FD8FF",bg:"#04080C"}},{name:"白光",p:{fg:"#FFF6E0",bg:"#080808",glow:.6}},{name:"全彩",p:{colorMode:"rgb",bg:"#050505"}},{name:"粉紅霓虹",p:{fg:"#FF4FD8",bg:"#0C040B",glow:1.1}},{name:"方塊像素",p:{shape:"square",size:.86,fg:"#FFB000",bg:"#0B0804",glow:.4}},{name:"大顆燈泡",p:{cols:30,fg:"#FFD27A",bg:"#120C06",glow:1.2}}],thumbParams:e=>({cols:Math.max(16,Math.round(.5*e.cols))}),CONTROLS:[{type:"select",key:"content",label:"要顯示什麼",main:!0,options:[["text","跑馬燈文字"],["photo","照片／影片"]]},{type:"text",key:"text",label:"燈牌文字（可換行，最多 4 行）",area:!0,main:!0,show:e=>"text"===e.content},{type:"button",label:"上傳照片／影片",main:!0,show:e=>"photo"===e.content},{type:"range",key:"cols",label:"每行幾顆燈",min:16,max:160,step:1,thumbs:!0},{type:"select",key:"shape",label:"燈的形狀",options:[["round","圓形"],["square","方形"]]},{type:"range",key:"size",label:"燈的大小",min:.3,max:1,step:.01},{type:"range",key:"glow",label:"光暈",min:0,max:2,step:.01},{type:"range",key:"off",label:"暗燈亮度",min:0,max:.4,step:.01},{type:"range",key:"speed",label:"跑馬燈速度",min:.2,max:3,step:.05},{type:"select",key:"colorMode",label:"顏色",options:[["mono","單色"],["rgb","全彩"]]},{type:"color",key:"fg",label:"燈的顏色",show:e=>"mono"===e.colorMode},{type:"color",key:"bg",label:"底板顏色"},{type:"check",key:"invert",label:"反相（照片模式）"},{type:"range",key:"contrast",label:"對比",min:-100,max:100,step:1},{type:"range",key:"gamma",label:"暗部",min:.3,max:3,step:.01},{type:"check",key:"transparent",label:"透明背景"}],MOTIONS:[{id:"marquee",name:"跑馬燈",period:4},{id:"none",name:"靜態"},{id:"flicker",name:"閃爍",period:2},{id:"scan",name:"掃描",period:2},{id:"pulse",name:"呼吸",period:2}],render(e,t,a,r){const s=i(t,a,r),c=l(s),d=s.cell,m=.5*d*a.size;if(a.glow>0){n.width=s.cols,n.height=s.rows;const i=o.createImageData(s.cols,s.rows);c.forEach(((e,t)=>{i.data[4*t]=e.r,i.data[4*t+1]=e.g,i.data[4*t+2]=e.b,i.data[4*t+3]=255*e.v})),o.putImageData(i,0,0),e.save(),e.globalCompositeOperation="lighter",e.imageSmoothingEnabled=!0;for(const[o,i]of[[1,.55],[1,.35]]){e.globalAlpha=i*a.glow;const l=d*(o+.6);e.drawImage(n,t.x-l,t.y-l,s.cols*d+2*l,s.rows*d+2*l)}e.restore()}for(const n of c){const o=Math.max(a.off,n.v),i=t.x+(n.x+.5)*d,l=t.y+(n.y+.5)*d,r=.35+.65*o;e.fillStyle=`rgba(${n.r*r|0},${n.g*r|0},${n.b*r|0},${o})`,"square"===a.shape?e.fillRect(i-m,l-m,2*m,2*m):(e.beginPath(),e.arc(i,l,m,0,2*Math.PI),e.fill()),n.v>.6&&m>3&&(e.fillStyle=`rgba(255,255,255,${.9*(n.v-.6)})`,e.beginPath(),e.arc(i-.25*m,l-.25*m,.35*m,0,2*Math.PI),e.fill())}},svg(e,t,n){const o=i(e,t,{...n,motion:"none"}),a=o.cell,r=.5*a*t.size,s=e=>Math.round(10*e)/10,c=[];for(const n of l(o)){const o=Math.max(t.off,n.v);if(o<.02)continue;const i=.35+.65*o,l=`rgb(${n.r*i|0},${n.g*i|0},${n.b*i|0})`,d=e.x+(n.x+.5)*a,m=e.y+(n.y+.5)*a;c.push("square"===t.shape?`<rect x="${s(d-r)}" y="${s(m-r)}" width="${s(2*r)}" height="${s(2*r)}" fill="${l}" fill-opacity="${o.toFixed(2)}"/>`:`<circle cx="${s(d)}" cy="${s(m)}" r="${s(r)}" fill="${l}" fill-opacity="${o.toFixed(2)}"/>`)}return c.join("\n")}}})();!function(){const n=t,o=e=>document.querySelector(e),a=[{id:"orig",name:"原始比例"},{id:"post",name:"IG 貼文 4:5",w:1080,h:1350},{id:"story",name:"限動 9:16",w:1080,h:1920},{id:"square",name:"方形 1:1",w:1080,h:1080},{id:"poster",name:"海報 A4",w:2480,h:3508,poster:!0},{id:"print",name:"T-shirt／貼紙",print:!0}],i=a.filter((e=>(n.formats||a.map((e=>e.id))).includes(e.id))),l=n.MOTIONS||[{id:"none",name:"靜態"}],r=n.keep||[],s=!(!n.needsSource&&!n.acceptsSource);let c={...n.BASE,...n.STYLES[0].p},d=0;const m={format:n.defaultFormat||i[0].id,motion:l[0].id,zoom:1,panX:0,panY:0,title:"",subtitle:""},p=()=>i.find((e=>e.id===m.format));let u=null,f=1080,h=1350,g=!1;const y=()=>!n.needsSource||!!u,b=()=>g||"none"!==m.motion||!!n.alwaysAnimated;function x(){o("#empty").classList.add("hide"),o("#view").style.display="block",o("#panel").classList.remove("off"),j(),N(!0)}function v(e,t,a,i){g&&u&&u!==e&&u.pause(),u=e,f=t,h=a,g=i,m.zoom=1,m.panX=m.panY=0,o("#zoom").value=1,o("#zoomOut").textContent="1.00",o("#openBtn2").classList.remove("hide"),n.onSource&&n.onSource(c),x()}function w(e){if(e&&s)if(e.type.startsWith("video")){const t=document.createElement("video");t.muted=!0,t.loop=!0,t.playsInline=!0,t.onloadeddata=()=>{v(t,t.videoWidth,t.videoHeight,!0),t.play()},t.src=URL.createObjectURL(e)}else if(e.type.startsWith("image")){const t=new FileReader;t.onload=()=>{const e=new Image;e.onload=()=>v(e,e.naturalWidth,e.naturalHeight,!1),e.src=t.result},t.readAsDataURL(e)}else D("請放入圖片或影片檔")}function S(e){const t=p();let[n,o]=function(){const e=p();return e.w?[e.w,e.h]:u?[f,h]:[1080,1080]}();if(t.w)"png"!==e||t.poster||(n*=2,o*=2),"video"===e&&t.poster&&(n=1080,o=Math.round(1080*t.h/t.w));else{const t={png:4e3,video:1920,svg:2e3}[e]/Math.max(n,o);n*=t,o*=t}if("svg"!==e){const e=Math.min(1,720/Math.max(n,o));n*=e,o*=e}return[2*Math.round(n/2),2*Math.round(o/2)]}function M(e,t){if(p().poster){const n=.07*e;return{x:n,y:n,w:e-2*n,h:.7*t-n}}return{x:0,y:0,w:e,h:t}}const k=document.createElement("canvas"),C=k.getContext("2d",{willReadFrequently:!0});function $(e,t){if(!u||g&&u.readyState<2)return null;e=Math.max(1,Math.round(e)),t=Math.max(1,Math.round(t)),k.width=e,k.height=t;const n=Math.max(e/f,t/h)*m.zoom,o=f*n,a=h*n;return C.fillStyle="#fff",C.fillRect(0,0,e,t),C.imageSmoothingEnabled=!0,C.imageSmoothingQuality="high",C.drawImage(u,(e-o)/2-m.panX*(o-e)/2,(t-a)/2-m.panY*(a-t)/2,o,a),C.getImageData(0,0,e,t)}function L(e){const t=e.data,n=new Uint32Array(256);for(let e=0;e<t.length;e+=4)n[(t[e]+t[e+1]+t[e+2])/3|0]++;const o=t.length/4,a=e=>{let t=0;for(let a=0;a<256;a++)if(t+=n[a],t>=o*e)return a;return 255},i=a(.02),l=Math.max(a(.98),i+13);return e=>Math.min(1,Math.max(0,(e-i)/(l-i)))}const E=e=>{const t=parseInt(e.slice(1),16);return(.299*(t>>16)+.587*(t>>8&255)+.114*(255&t))/255};function T(e,t,o,a,i={}){const l=M(t,o),r=(a.transparent||p().print)&&!i.forceBg;e.save(),e.globalCompositeOperation="source-over",e.clearRect(0,0,t,o),r||(e.fillStyle=a.bg,e.fillRect(0,0,t,o)),e.beginPath(),e.rect(l.x,l.y,l.w,l.h),e.clip(),n.render(e,l,a,{t:i.t||0,thumb:!!i.thumb,transparent:r,sample:$,levels:L,motion:i.thumb?"none":m.motion,W:t,H:o}),e.restore(),p().poster&&!i.thumb&&function(e,t,n,o,a){const i=function(e,t,n){const o=n.y+n.h;return{title:{text:m.title||"你的標題",size:.075*e,y:o+.13*e},rule:{x:n.x,y:o+.165*e,w:.08*e,h:.004*e},sub:{text:m.subtitle||"SUBTITLE",size:.026*e,y:o+.215*e}}}(t,0,o),l=function(e){return E(e.bg)<.5?"#F2EFE6":e.fg||"#111111"}(a);e.save(),e.fillStyle=l,e.font=`700 ${i.title.size}px "Songti TC","Noto Serif TC","PMingLiU",serif`,e.fillText(i.title.text,o.x,i.title.y,o.w),e.fillRect(i.rule.x,i.rule.y,i.rule.w,i.rule.h),e.font=`500 ${i.sub.size}px "Avenir Next","Helvetica Neue","PingFang TC",sans-serif`,e.fillText(i.sub.text,o.x,i.sub.y,o.w),e.restore()}(e,t,0,l,a),i.thumb||function(e,t,n){e.save(),e.translate(t/2,n/2),e.rotate(-Math.PI/6);const o=.045*Math.max(t,n);e.font=`800 ${o}px "Avenir Next","PingFang TC",sans-serif`,e.fillStyle="rgba(128,128,128,.35)",e.textAlign="center";const a=Math.hypot(t,n);for(let t=-a/2,n=0;t<a/2;t+=4*o,n++)for(let i=-a/2;i<a/2;i+=9*o)e.fillText("LZI LAB 試用版",i+n%2*o*4.5,t);e.restore()}(e,t,o)}const F=o("#view"),q=F.getContext("2d");let A=!1,B=!1,I=0,P=performance.now();function R(){if(n.duration)return n.duration(c)+(n.hold||1.2);const e=l.find((e=>e.id===m.motion));return e&&e.period?2*e.period:4}function N(e){A=!0,P=performance.now(),e&&(clearTimeout(I),I=setTimeout(O,200)),Y()}function z(){if(y()&&!B&&(A||b())&&(!g||u.readyState>=2)){const[e,t]=function(){const[e,t]=S("svg"),o=(b()?n.previewAnimated||900:1300)/Math.max(e,t);return[Math.round(e*o),Math.round(t*o)]}();F.width===e&&F.height===t||(F.width=e,F.height=t);const o=g?u.currentTime:(performance.now()-P)/1e3%R();T(q,e,t,c,{t:o}),A=!1}requestAnimationFrame(z)}function O(){if(!y())return;const[e,t]=S("svg"),o=Math.min(240/e,300/t),a=Math.round(e*o),i=Math.round(t*o);document.querySelectorAll(".style canvas").forEach(((e,t)=>{e.width=a,e.height=i;const o={...n.BASE,...n.STYLES[t].p};r.forEach((e=>{o[e]=c[e]})),n.thumbParams&&Object.assign(o,n.thumbParams(o)),T(e.getContext("2d"),a,i,o,{thumb:!0,t:n.thumbT||0})}))}function Y(){if(!y())return;const[t,n]=S("png"),[a,i]=S("video");o("#pngInfo").textContent=`PNG・${t}×${n}`;const l=b();o("#mp4Info").textContent=l?`MP4・${a}×${i}`:"先選一個動態效果",o("#mp4Btn").disabled=!l,o("#svgBtn").disabled=e,o("#txtBtn").disabled=e,o("#stats").textContent=u?`${p().name}・${f}×${h}`:p().name}function D(e,t=2200){const n=o("#toast");n.textContent=e,n.style.display="block",clearTimeout(D.timer),D.timer=setTimeout((()=>n.style.display="none"),t)}const U=e=>Number.isInteger(e)?e:(+e).toFixed(2);function X(e){const t=document.createElement("div");return t.innerHTML=e.trim(),t.firstChild}function j(){document.querySelectorAll(".style").forEach(((e,t)=>e.classList.toggle("on",t===d))),document.querySelectorAll("#formats .chip").forEach((e=>e.classList.toggle("on",e.dataset.id===m.format))),document.querySelectorAll("#motions .chip").forEach((e=>e.classList.toggle("on",e.dataset.id===m.motion)));for(const e of n.CONTROLS||[]){const t=document.querySelector(`[data-key="${e.key}"][data-type="${e.type}"]`);if(!t)continue;const n=c[e.key];if("range"===e.type)t.querySelector("input").value=n,t.querySelector("output").textContent=U(n);else if("select"===e.type)t.querySelector("select").value=n;else if("color"===e.type)t.querySelector("input").value=n;else if("check"===e.type)t.querySelector("input").checked=!!n;else if("text"===e.type){const e=t.querySelector("textarea,input");e.value!==n&&(e.value=n)}else"shapes"===e.type&&t.querySelectorAll("button").forEach((e=>e.classList.toggle("on",e.dataset.v===n)));t.classList.toggle("hide",!!e.show&&!e.show(c))}o("#posterFields").classList.toggle("hide",!p().poster),o("#zoomRow").classList.toggle("hide",!u),o("#formatNote").textContent=p().print?"背景會是透明的，適合送印、做貼紙。":u?"直接在畫面上拖曳，可以調整照片位置。":"",F.classList.toggle("pan",!!u),Y()}function G(e,t){const n=document.createElement("a");n.href=URL.createObjectURL(e),n.download=t,document.body.appendChild(n),n.click(),setTimeout((()=>{URL.revokeObjectURL(n.href),n.remove()}),3e3)}const H=()=>`LZI${n.name}_${n.STYLES[d].name.replace(/\s/g,"")}_${p().name.replace(/[\s／:]/g,"")}`;o("#pngBtn").onclick=()=>{if(!y())return;const[e,t]=S("png"),o=document.createElement("canvas");o.width=e,o.height=t,D("產生中…"),setTimeout((()=>{T(o.getContext("2d"),e,t,c,{t:g?u.currentTime:n.duration?n.duration(c):0}),o.toBlob((n=>{G(n,H()+".png"),D(`已下載 ${e}×${t} PNG`)}),"image/png")}),30)},o("#svgBtn").onclick=()=>{y()},o("#txtBtn").onclick=()=>{y()},o("#mp4Btn").onclick=async()=>{if(!y()||B||!b())return;const e=["video/mp4;codecs=avc1.640028","video/mp4","video/webm;codecs=vp9","video/webm"].find((e=>window.MediaRecorder&&MediaRecorder.isTypeSupported(e)));if(!e)return void D("這個瀏覽器不能錄影片，請改用 Chrome 或 Safari");const[t,n]=S("video"),a=document.createElement("canvas");a.width=t,a.height=n;const i=a.getContext("2d"),l=new MediaRecorder(a.captureStream(30),{mimeType:e,videoBitsPerSecond:16e6}),r=[];l.ondataavailable=e=>e.data.size&&r.push(e.data),l.onstop=()=>{G(new Blob(r,{type:e}),H()+"."+(e.includes("mp4")?"mp4":"webm")),o("#mp4Btn").disabled=!1,N(),D("影片已下載")};const s=o("#mp4Info"),d=e=>{T(i,t,n,c,{t:e,forceBg:!0}),q.drawImage(a,0,0,F.width,F.height)};if(B=!0,o("#mp4Btn").disabled=!0,g){const e=u;e.pause(),e.loop=!1,e.currentTime=0,await new Promise((t=>e.addEventListener("seeked",t,{once:!0}))),d(0),l.start();const t=()=>{B&&(d(e.currentTime),s.textContent=`錄製中 ${Math.round(e.currentTime/e.duration*100)}%`,e.requestVideoFrameCallback?e.requestVideoFrameCallback(t):requestAnimationFrame(t))};e.onended=()=>{B=!1,l.stop(),e.onended=null,e.loop=!0,e.play()},await e.play(),t()}else{const e=R();d(0),l.start();const t=performance.now(),n=()=>{const o=(performance.now()-t)/1e3;if(o>=e)return B=!1,void l.stop();d(o),s.textContent=`錄製中 ${Math.round(o/e*100)}%`,requestAnimationFrame(n)};n()}},function(){document.title=`LZI ${n.name} 1.0 試用版`,o("#pname").textContent=`${n.name} 1.0`,o("#ptag").textContent=n.tagline,n.needsSource||o("#empty").classList.add("hide"),n.svg&&o("#svgBtn").classList.remove("hide"),n.textOut&&o("#txtBtn").classList.remove("hide"),n.motionTitle&&(o("#motionTitle").textContent=n.motionTitle),n.motionNote&&(o("#motionNote").textContent=n.motionNote),l.length<2&&o("#motionSec").classList.add("hide"),n.STYLES.forEach(((e,t)=>{const a=X(`<button class="style"><canvas></canvas><span>${e.name}</span></button>`);a.onclick=()=>{const o={};r.forEach((e=>{o[e]=c[e]})),d=t,c={...n.BASE,...e.p,...o},j(),N()},o("#styles").appendChild(a)})),i.forEach((e=>{const t=X(`<button class="chip">${e.name}</button>`);t.dataset.id=e.id,t.onclick=()=>{m.format=e.id,m.panX=m.panY=0,j(),N(!0)},o("#formats").appendChild(t)})),l.forEach((e=>{const t=X(`<button class="chip">${e.name}</button>`);t.dataset.id=e.id,t.onclick=()=>{m.motion=e.id,j(),N()},o("#motions").appendChild(t)})),function(){for(const e of n.CONTROLS||[]){const t=e.main?o("#mainCtl"):o("#advCtl");let n;if("range"===e.type){n=X(`<div class="row"><span>${e.label}</span><input type="range" min="${e.min}" max="${e.max}" step="${e.step}"><output></output></div>`);const t=n.querySelector("input");t.oninput=()=>{c[e.key]=+t.value,n.querySelector("output").textContent=U(c[e.key]),N(e.thumbs)}}else if("select"===e.type)n=X(`<label class="field"><span>${e.label}</span><select>${e.options.map((([e,t])=>`<option value="${e}">${t}</option>`)).join("")}</select></label>`),n.querySelector("select").onchange=t=>{c[e.key]=t.target.value,j(),N(!0)};else if("color"===e.type)n=X(`<label class="field"><span>${e.label}</span><input type="color"></label>`),n.querySelector("input").oninput=t=>{c[e.key]=t.target.value,N()};else if("check"===e.type)n=X(`<label class="chk"><input type="checkbox"> ${e.label}</label>`),n.querySelector("input").onchange=t=>{c[e.key]=t.target.checked,N(!0)};else if("text"===e.type){n=X(`<label class="field"><span>${e.label}</span>${e.area?"<textarea></textarea>":'<input type="text">'}</label>`);const t=n.querySelector("textarea,input");e.placeholder&&(t.placeholder=e.placeholder),t.oninput=()=>{c[e.key]=t.value,N(!0)}}else if("button"===e.type)n=X(`<button style="width:100%;margin:6px 0">${e.label}</button>`),n.onclick=()=>o("#file").click();else if("shapes"===e.type){n=X('<div class="chips"></div>');for(const[t,o]of e.options){const a=X(`<button class="chip">${o}</button>`);a.dataset.v=t,a.onclick=()=>{c[e.key]=t,j(),N(!0)},n.appendChild(a)}}n.dataset.key=e.key,n.dataset.type=e.type,t.appendChild(n),e.main&&o("#mainSec").classList.remove("hide")}n.mainTitle&&(o("#mainTitle").textContent=n.mainTitle)}();let e=0;document.querySelectorAll("aside section").forEach((t=>{t.classList.contains("hide")||(t.querySelector(".n").textContent=++e)})),o("#title").oninput=e=>{m.title=e.target.value,N()},o("#subtitle").oninput=e=>{m.subtitle=e.target.value,N()},o("#zoom").oninput=e=>{m.zoom=+e.target.value,o("#zoomOut").textContent=m.zoom.toFixed(2),N(!0)},o("#openBtn").onclick=o("#openBtn2").onclick=()=>o("#file").click(),o("#file").onchange=e=>{w(e.target.files[0]),e.target.value=""},o("#demoBtn").onclick=()=>{const e=function(){const e=document.createElement("canvas");e.width=1200,e.height=1500;const t=e.getContext("2d");let n=t.createLinearGradient(0,0,0,1500);n.addColorStop(0,"#f7dcae"),n.addColorStop(1,"#2f5f80"),t.fillStyle=n,t.fillRect(0,0,1200,1500),n=t.createRadialGradient(470,520,30,560,640,380),n.addColorStop(0,"#ffffff"),n.addColorStop(.45,"#e8743b"),n.addColorStop(1,"#4a1426"),t.fillStyle=n,t.beginPath(),t.arc(560,640,360,0,2*Math.PI),t.fill();for(let e=0;e<5;e++){const o=e/5*Math.PI*2-Math.PI/2,a=900+110*Math.cos(o),i=1080+110*Math.sin(o);n=t.createRadialGradient(a,i,10,a,i,90),n.addColorStop(0,"#ffffff"),n.addColorStop(1,"#c2456b"),t.fillStyle=n,t.beginPath(),t.arc(a,i,90,0,2*Math.PI),t.fill()}return t.fillStyle="#5cbf8a",t.beginPath(),t.arc(900,1080,62,0,2*Math.PI),t.fill(),e}();v(e,e.width,e.height,!1)};const t=o("#stage");t.addEventListener("dragover",(e=>{e.preventDefault(),t.classList.add("over")})),t.addEventListener("dragleave",(()=>t.classList.remove("over"))),t.addEventListener("drop",(e=>{e.preventDefault(),t.classList.remove("over"),w(e.dataTransfer.files[0])})),window.addEventListener("paste",(e=>{if(s&&!/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName))for(const t of e.clipboardData.items)if("file"===t.kind){w(t.getAsFile());break}}));let a=null;F.addEventListener("pointerdown",(e=>{u&&(a={x:e.clientX,y:e.clientY},F.setPointerCapture(e.pointerId),F.classList.add("dragging"))})),F.addEventListener("pointermove",(e=>{if(!a)return;const t=F.width/F.clientWidth,n=M(F.width,F.height),o=Math.max(n.w/f,n.h/h)*m.zoom,i=(f*o-n.w)/2,l=(h*o-n.h)/2;i>1&&(m.panX=Math.max(-1,Math.min(1,m.panX-(e.clientX-a.x)*t/i))),l>1&&(m.panY=Math.max(-1,Math.min(1,m.panY-(e.clientY-a.y)*t/l))),a={x:e.clientX,y:e.clientY},A=!0}));const p=()=>{a&&(a=null,F.classList.remove("dragging"),N(!0))};F.addEventListener("pointerup",p),F.addEventListener("pointercancel",p),o("#trialBadge").classList.remove("hide"),o("#trialNote").classList.remove("hide"),o("#trialNote").textContent="試用版：輸出限 720px、有浮水印"+(n.svg?"、不能下載向量檔":"")+(n.textOut?"、不能下載文字檔":"")+"。",j(),n.needsSource||x(),"#demo"===location.hash&&n.needsSource&&o("#demoBtn").click(),z()}()}();
+</script>
+
+</body>
+</html>

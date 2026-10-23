@@ -1,0 +1,29 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><link rel="icon" href="/img/favicon.png"><title>LZI 工具所｜完整版</title>
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#1f2430;color:#f3ece0;font:16px/1.6 -apple-system,"PingFang TC",sans-serif;padding:0 16px}
+form{width:100%;max-width:360px}h1{font-size:22px;margin:0 0 6px}p{margin:0 0 18px;font-size:14px;opacity:.75}
+input{box-sizing:border-box;width:100%;font:600 17px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;padding:14px;border-radius:12px;border:0;background:#f3ece0;color:#1f2430}
+button{width:100%;margin-top:12px;padding:14px;border:0;border-radius:12px;background:#F0B429;color:#111;font:700 16px -apple-system,sans-serif}
+#e{color:#ff9c8a;min-height:1.6em;font-size:14px;margin-top:8px}</style></head><body>
+<form id="f" hidden><h1>LZI 工具所｜完整版</h1><p>請輸入購買後收到的解鎖碼。輸入一次，這台裝置之後會自動打開。</p>
+<input id="p" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX-XXXX"><button>解鎖</button><div id="e"></div></form>
+<script>
+const D={"s": "bCGU82zJ0AKywCbN3NXLxA==", "i": "z130iBYJtDwZJ4X1", "c": "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", "n": 250000},K="lzi_key:"+location.pathname;
+const ub=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function open_(pw){
+  const m=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
+  const k=await crypto.subtle.deriveKey({name:"PBKDF2",salt:ub(D.s),iterations:D.n,hash:"SHA-256"},m,{name:"AES-GCM",length:256},false,["decrypt"]);
+  const h=new TextDecoder().decode(await crypto.subtle.decrypt({name:"AES-GCM",iv:ub(D.i)},k,ub(D.c)));
+  let saved=false;try{localStorage.setItem(K,pw);saved=true}catch(e){}
+  if(!saved)history.replaceState(null,"","#k="+encodeURIComponent(pw));
+  else if(location.hash)history.replaceState(null,"",location.pathname);
+  document.open();document.write(h);document.close();
+}
+(async()=>{
+  const hk=new URLSearchParams(location.hash.slice(1)).get("k");let st=null;try{st=localStorage.getItem(K)}catch(e){}
+  for(const pw of [hk,st])if(pw){try{return await open_(pw)}catch(e){}}
+  const f=document.getElementById("f");f.hidden=false;
+  f.onsubmit=async ev=>{ev.preventDefault();const pw=document.getElementById("p").value.trim().toUpperCase();
+    try{await open_(pw)}catch(e){document.getElementById("e").textContent="解鎖碼不對，請再確認一次"}};
+})();
+</script></body></html>
