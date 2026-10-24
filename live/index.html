@@ -73,7 +73,7 @@ footer{margin-top:30px;color:var(--mute);font-size:13px}
     <div class="chips" id="modes"></div>
     <div class="row" style="margin-top:12px">
       <div><label>速度</label><input type="range" id="speed" min="1" max="10" value="5"></div>
-      <div><label>燈的大小</label><input type="range" id="rows" min="12" max="32" step="2" value="20"></div>
+      <div><label>燈的大小</label><input type="range" id="rows" min="12" max="32" step="2" value="24"></div>
     </div>
     <button class="big" id="go">全螢幕舉起來</button>
     <button class="ghost" id="share">分享這面燈牌給朋友</button>
@@ -90,7 +90,7 @@ footer{margin-top:30px;color:var(--mute);font-size:13px}
     <h2>常見問題</h2>
     <p><b>要下載 App 嗎？</b><br>不用。這是網頁，手機瀏覽器打開就能用，也不用註冊。</p>
     <p><b>演唱會現場會不會自動熄螢幕？</b><br>全螢幕時會請手機保持螢幕開著（新版 iPhone、Android 都支援）。舊手機請到設定把自動鎖定改長一點。</p>
-    <p><b>字要多大才看得到？</b><br>從遠處看，4–8 個字最清楚；燈的大小拉到 12–16 顆，字會最大。白色、黃色、粉紅在暗的場館最顯眼。</p>
+    <p><b>字要多大才看得到？</b><br>從遠處看，4–8 個字最清楚，選「固定」字會自動放到最大。筆畫多的字（像「愛」「應援」）燈的大小拉到 24 以上才不會擠在一起。白色、黃色、粉紅在暗的場館最顯眼。</p>
     <p><b>可以傳給朋友一起舉嗎？</b><br>按「分享這面燈牌」，朋友點開就是同一面燈牌，大家一起舉就是一整排。</p>
     <p><b>字會被上傳嗎？</b><br>不會。字只存在連結裡，畫面全部在你的手機上畫出來。</p>
   </div>
@@ -107,7 +107,7 @@ const COLORS = [
 ];
 const MODES = [["跑馬燈", "scroll"], ["固定", "still"], ["閃爍", "blink"]];
 const $ = s => document.querySelector(s);
-const st = { t: "今晚我們一起唱", c: 0, m: "scroll", s: 5, r: 20 };
+const st = { t: "今晚我們一起唱", c: 0, m: "scroll", s: 5, r: 24 };
 
 // 讀分享連結 #t=…&c=…&m=…&s=…&r=…
 (function () {
