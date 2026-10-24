@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>手機跑馬燈｜免費線上 LED 應援燈牌，免下載、可分享｜LZI 燈牌機</title>
+<meta name="description" content="打一行字，手機橫過來就是 LED 跑馬燈。免下載 App、免費、可全螢幕、螢幕不會自動熄滅，還能產生連結分享給朋友。演唱會應援、接機、店門口看板都能用。">
+<meta property="og:title" content="手機跑馬燈｜免費 LED 應援燈牌">
+<meta property="og:description" content="打一行字，手機橫過來就是 LED 跑馬燈。免下載、可分享連結。">
+<meta property="og:image" content="https://lzilab.github.io/img/live_og.jpg">
+<meta property="og:type" content="website">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#0b0b10">
+<link rel="icon" href="/img/favicon.png">
+<link rel="canonical" href="https://lzilab.github.io/live/">
+<style>
+:root{--bg:#0b0b10;--panel:#16161f;--line:#2a2a36;--fg:#f3ece0;--mute:#9a96a6;--gold:#c49a5a}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+a{color:var(--gold)}
+.wrap{max-width:720px;margin:0 auto;padding:18px 16px 40px}
+.brand{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mute);letter-spacing:.08em}
+.brand b{color:var(--fg);letter-spacing:.12em}
+h1{font-size:34px;line-height:1.3;margin:10px 0 4px}
+.lead{color:var(--mute);margin:0 0 14px;font-size:15px}
+#preview{width:100%;aspect-ratio:2.4/1;display:block;border-radius:14px;background:#000;border:1px solid var(--line)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:14px}
+label{display:block;font-size:13px;color:var(--mute);margin:2px 0 6px}
+textarea{width:100%;font:inherit;font-size:20px;font-weight:700;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:#0e0e15;color:var(--fg);resize:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:2px solid transparent;border-radius:999px;padding:7px 12px;font:inherit;font-size:14px;background:#23232e;color:var(--fg);cursor:pointer}
+.chip.on{border-color:var(--fg)}
+.sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.row{display:flex;gap:12px;align-items:center}
+.row>div{flex:1}
+input[type=range]{width:100%;accent-color:var(--gold)}
+.big{display:block;width:100%;margin-top:14px;padding:16px;border:0;border-radius:14px;font:inherit;font-size:19px;font-weight:800;background:var(--fg);color:#111;cursor:pointer}
+.ghost{display:block;width:100%;margin-top:10px;padding:13px;border:1px solid var(--line);border-radius:14px;font:inherit;font-size:16px;background:transparent;color:var(--fg);cursor:pointer}
+.tip{font-size:13px;color:var(--mute);margin:10px 2px 0}
+.up{display:grid;gap:10px;margin-top:22px}
+.up a{display:block;text-decoration:none;color:var(--fg);background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.up a b{font-size:17px}.up a span{display:block;color:var(--mute);font-size:14px}
+.up a.hot{border-color:var(--gold)}
+h2{font-size:19px;margin:28px 0 8px}
+.faq p{margin:4px 0 12px;color:#d8d2c6;font-size:15px}
+.faq b{color:var(--fg)}
+footer{margin-top:30px;color:var(--mute);font-size:13px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:#111;padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:20}
+#toast.show{opacity:1}
+#stage{position:fixed;inset:0;background:#000;display:none;z-index:10;touch-action:none}
+#stage canvas{width:100%;height:100%;display:block}
+#stage .hint{position:absolute;left:0;right:0;bottom:max(14px,env(safe-area-inset-bottom));text-align:center;color:#777;font-size:13px;transition:opacity 1s}
+#shared{display:none;background:#1f1a10;border:1px solid var(--gold);border-radius:14px;padding:12px 14px;margin-top:12px;font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><b>LZI 工具所</b> · 燈牌機</div>
+  <h1>手機跑馬燈</h1>
+  <div style="color:var(--gold);font-weight:700;margin-top:-2px">免費 LED 應援燈牌・免下載・可分享</div>
+  <p class="lead">打一行字，手機橫過來就是 LED 跑馬燈。免下載 App，可以全螢幕、螢幕不會自己熄滅，還能把燈牌變成連結傳給朋友。</p>
+  <div id="shared">朋友分享了一面燈牌給你，按下面「全螢幕舉起來」就能用，也可以改字。</div>
+  <canvas id="preview"></canvas>
+
+  <div class="card">
+    <label for="txt">要跑的字（最多 30 個）</label>
+    <textarea id="txt" rows="2" maxlength="30">今晚我們一起唱</textarea>
+    <label style="margin-top:12px">燈色</label>
+    <div class="chips" id="colors"></div>
+    <label style="margin-top:12px">怎麼動</label>
+    <div class="chips" id="modes"></div>
+    <div class="row" style="margin-top:12px">
+      <div><label>速度</label><input type="range" id="speed" min="1" max="10" value="5"></div>
+      <div><label>燈的大小</label><input type="range" id="rows" min="12" max="32" step="2" value="20"></div>
+    </div>
+    <button class="big" id="go">全螢幕舉起來</button>
+    <button class="ghost" id="share">分享這面燈牌給朋友</button>
+    <p class="tip">現場小技巧：亮度調到最大，並關掉「自動調整亮度」；全螢幕時點一下畫面就能退出。iPhone 建議先按分享 →「加入主畫面」再打開，就不會有網址列。</p>
+  </div>
+
+  <div class="up">
+    <a class="hot" href="https://portaly.cc/lzilabtools/product/Ww4qsalem1sIYuN4inTH"><b>懶得弄？應援燈牌代做 NT$99</b><span>給我字和顏色，24 小時內交手機直式 MP4，放相簿隨時開。</span></a>
+    <a href="https://portaly.cc/lzilabtools/product/HEZhXPU53VEwsB2gBcwc"><b>要做影片、限動、海報：LZI 燈牌機完整版</b><span>9 種燈色、直式／橫式 MP4、照片也能變燈牌，高解析無浮水印。早鳥 NT$149 到 12/31。</span></a>
+    <a href="/led-board/"><b>先試完整功能（免費試用版）</b><span>LED 跑馬燈產生器：輸出圖片和影片。</span></a>
+  </div>
+
+  <div class="faq">
+    <h2>常見問題</h2>
+    <p><b>要下載 App 嗎？</b><br>不用。這是網頁，手機瀏覽器打開就能用，也不用註冊。</p>
+    <p><b>演唱會現場會不會自動熄螢幕？</b><br>全螢幕時會請手機保持螢幕開著（新版 iPhone、Android 都支援）。舊手機請到設定把自動鎖定改長一點。</p>
+    <p><b>字要多大才看得到？</b><br>從遠處看，4–8 個字最清楚；燈的大小拉到 12–16 顆，字會最大。白色、黃色、粉紅在暗的場館最顯眼。</p>
+    <p><b>可以傳給朋友一起舉嗎？</b><br>按「分享這面燈牌」，朋友點開就是同一面燈牌，大家一起舉就是一整排。</p>
+    <p><b>字會被上傳嗎？</b><br>不會。字只存在連結裡，畫面全部在你的手機上畫出來。</p>
+  </div>
+  <footer>LZI 工具所｜IG／Threads <a href="https://www.threads.com/@lzilab.tools">@lzilab.tools</a>｜<a href="/">更多免費工具</a></footer>
+</div>
+
+<div id="stage"><canvas id="big"></canvas><div class="hint" id="hint">點一下畫面退出</div></div>
+<div id="toast"></div>
+
+<script>
+const COLORS = [
+  ["粉紅霓虹", "#ff4fd8"], ["白光", "#ffffff"], ["琥珀黃", "#ffc21a"], ["紅色", "#ff3b30"],
+  ["冰藍", "#3fd2ff"], ["螢光綠", "#39ff6a"], ["紫色", "#b45cff"], ["彩虹", "rainbow"]
+];
+const MODES = [["跑馬燈", "scroll"], ["固定", "still"], ["閃爍", "blink"]];
+const $ = s => document.querySelector(s);
+const st = { t: "今晚我們一起唱", c: 0, m: "scroll", s: 5, r: 20 };
+
+// 讀分享連結 #t=…&c=…&m=…&s=…&r=…
+(function () {
+  if (!location.hash) return;
+  const q = new URLSearchParams(location.hash.slice(1));
+  if (q.get("t")) { st.t = q.get("t").slice(0, 30); $("#shared").style.display = "block"; }
+  const c = +q.get("c"); if (c >= 0 && c < COLORS.length) st.c = c;
+  if (MODES.some(m => m[1] === q.get("m"))) st.m = q.get("m");
+  const s = +q.get("s"); if (s >= 1 && s <= 10) st.s = s;
+  const r = +q.get("r"); if (r >= 12 && r <= 32) st.r = r;
+})();
+$("#txt").value = st.t; $("#speed").value = st.s; $("#rows").value = st.r;
+
+COLORS.forEach(([n, v], i) => {
+  const b = document.createElement("button"); b.className = "chip";
+  b.innerHTML = `<span class="sw" style="background:${v === "rainbow" ? "linear-gradient(90deg,#f33,#fc0,#3f6,#3cf,#c5f)" : v}"></span>${n}`;
+  b.onclick = () => { st.c = i; sync(); }; $("#colors").appendChild(b);
+});
+MODES.forEach(([n, v]) => {
+  const b = document.createElement("button"); b.className = "chip"; b.textContent = n; b.dataset.m = v;
+  b.onclick = () => { st.m = v; sync(); }; $("#modes").appendChild(b);
+});
+$("#txt").oninput = e => { st.t = e.target.value.replace(/\n/g, " ").slice(0, 30); bitmap = null; };
+$("#speed").oninput = e => st.s = +e.target.value;
+$("#rows").oninput = e => { st.r = +e.target.value; bitmap = null; };
+function sync() {
+  [...$("#colors").children].forEach((b, i) => b.classList.toggle("on", i === st.c));
+  [...$("#modes").children].forEach(b => b.classList.toggle("on", b.dataset.m === st.m));
+}
+sync();
+
+// 把字畫成「燈」的點陣：每顆燈取 4×4 超取樣的覆蓋率
+let bitmap = null;
+function makeBitmap() {
+  const R = st.r, S = 4, H = R * S, txt = (st.t.trim() || " ");
+  const c = document.createElement("canvas"), x = c.getContext("2d");
+  const font = `900 ${Math.round(H * 0.86)}px -apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif`;
+  x.font = font; const w = Math.ceil(x.measureText(txt).width) + S * 2;
+  c.width = w; c.height = H; x.font = font; x.fillStyle = "#fff"; x.textBaseline = "middle"; x.fillText(txt, S, H * 0.54);
+  const d = x.getImageData(0, 0, w, H).data, cols = Math.ceil(w / S), out = new Uint8Array(cols * R);
+  for (let j = 0; j < R; j++) for (let i = 0; i < cols; i++) {
+    let a = 0;
+    for (let y = 0; y < S; y++) for (let k = 0; k < S; k++) { const px = i * S + k; if (px < w) a += d[((j * S + y) * w + px) * 4 + 3]; }
+    out[j * cols + i] = a / (S * S) > 90 ? 1 : 0;
+  }
+  return { cols, R, data: out };
+}
+
+// 預先畫好一顆亮燈（有光暈）跟一顆暗燈，貼圖比每顆都算光暈快很多
+const sprites = {};
+function sprite(color, cell) {
+  const k = color + cell; if (sprites[k]) return sprites[k];
+  const c = document.createElement("canvas"); c.width = c.height = cell * 2; const x = c.getContext("2d");
+  const g = x.createRadialGradient(cell, cell, 0, cell, cell, cell);
+  g.addColorStop(0, "#fff"); g.addColorStop(0.18, color); g.addColorStop(0.42, color); g.addColorStop(0.62, color + "55"); g.addColorStop(1, color + "00");
+  x.fillStyle = g; x.fillRect(0, 0, cell * 2, cell * 2);
+  return sprites[k] = c;
+}
+function hsl(h) { return `hsl(${h},100%,60%)`; }
+function toHex(h) { const c = document.createElement("canvas").getContext("2d"); c.fillStyle = hsl(h); return c.fillStyle; }
+const rainbow = Array.from({ length: 24 }, (_, i) => toHex(i * 15));
+
+function draw(cv, t) {
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const W = Math.round(cv.clientWidth * dpr), H = Math.round(cv.clientHeight * dpr);
+  if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+  const x = cv.getContext("2d"); x.fillStyle = "#000"; x.fillRect(0, 0, W, H);
+  if (!bitmap || bitmap.R !== st.r) bitmap = makeBitmap();
+  const R = bitmap.R, scroll = st.m === "scroll";
+  let cell = H / (R + 2);
+  if (!scroll && (bitmap.cols + 2) * cell > W) cell = W / (bitmap.cols + 2);   // 固定／閃爍：縮小燈，整句放得下
+  const cols = Math.ceil(W / cell) + 1, rowsAll = Math.ceil(H / cell), rowOff = Math.floor((rowsAll - R) / 2);
+  const col = COLORS[st.c][1];
+  const off = scroll ? Math.floor(t / 1000 * st.s * 3.2) % (bitmap.cols + cols) - cols   // 從右邊進場
+                     : -Math.floor((Math.floor(W / cell) - bitmap.cols) / 2);
+  const on = st.m !== "blink" || Math.floor(t / 450) % 2 === 0;
+  const sz = Math.max(2, Math.round(cell / 2)), dim = sprite("#2a1f2a", sz), half = cell / 2, r = cell * 0.5;
+  const y0 = (H - rowsAll * cell) / 2;
+  for (let i = 0; i < cols; i++) {
+    const bi = i + off;
+    for (let jj = 0; jj < rowsAll; jj++) {
+      const j = jj - rowOff;
+      const lit = on && j >= 0 && j < R && bi >= 0 && bi < bitmap.cols && bitmap.data[j * bitmap.cols + bi];
+      const cx = i * cell + half, cy = y0 + jj * cell + half;
+      if (lit) {
+        const c = col === "rainbow" ? rainbow[(i + Math.floor(t / 60)) % 24] : col;
+        x.drawImage(sprite(c, sz), cx - cell, cy - cell, cell * 2, cell * 2);
+      } else { x.globalAlpha = 0.55; x.drawImage(dim, cx - r * 0.7, cy - r * 0.7, r * 1.4, r * 1.4); x.globalAlpha = 1; }
+    }
+  }
+}
+
+const pv = $("#preview"), big = $("#big"), stage = $("#stage");
+let full = false, lock = null;
+function loop(t) { if (full) draw(big, t); else draw(pv, t); requestAnimationFrame(loop); }
+requestAnimationFrame(loop);
+
+async function enter() {
+  full = true; stage.style.display = "block"; $("#hint").style.opacity = 1;
+  setTimeout(() => $("#hint").style.opacity = 0, 2500);
+  try { await (stage.requestFullscreen || stage.webkitRequestFullscreen).call(stage); } catch (e) {}
+  try { await screen.orientation.lock("landscape"); } catch (e) {}
+  try { lock = await navigator.wakeLock.request("screen"); } catch (e) {}
+}
+function exit() {
+  full = false; stage.style.display = "none";
+  try { (document.exitFullscreen || document.webkitExitFullscreen).call(document); } catch (e) {}
+  try { lock && lock.release(); lock = null; } catch (e) {}
+}
+$("#go").onclick = enter;
+stage.onclick = exit;
+document.addEventListener("visibilitychange", async () => { if (full && document.visibilityState === "visible") try { lock = await navigator.wakeLock.request("screen"); } catch (e) {} });
+
+function link() {
+  const q = new URLSearchParams({ t: st.t, c: st.c, m: st.m, s: st.s, r: st.r });
+  return location.origin + location.pathname + "#" + q.toString();
+}
+function toast(m) { const t = $("#toast"); t.textContent = m; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2200); }
+$("#share").onclick = async () => {
+  const url = link();
+  if (navigator.share) { try { await navigator.share({ title: "一起舉這面燈牌", text: `「${st.t}」點開就能全螢幕舉起來`, url }); return; } catch (e) { if (e.name === "AbortError") return; } }
+  try { await navigator.clipboard.writeText(url); toast("連結已複製，貼給朋友就好"); } catch (e) { prompt("複製這個連結傳給朋友：", url); }
+};
+</script>
+</body>
+</html>
