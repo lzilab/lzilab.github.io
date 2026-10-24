@@ -33,6 +33,16 @@ h1{font-size:clamp(32px,6vw,56px)}h2{font-size:clamp(24px,4vw,34px);margin-top:1
 ul.uses{padding-left:1.2em}details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0}
 summary{font-weight:700;cursor:pointer}footer{margin:56px 0 0;padding:24px 0 40px;border-top:1px solid var(--line);color:var(--gray);font-size:14px}
 .note{font-size:14px;color:var(--gray)}
+/* 10/24 v3：色帶＋主視覺（同 IG 概念海報） */
+.v3{background:var(--hc,#1f242c);color:#F3ECE0;margin:0 -20px;padding:40px 20px 36px;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+.v3 h1{color:#F3ECE0;margin-top:.2em;font-size:clamp(30px,4.2vw,46px);word-break:keep-all}.v3 .lead{color:rgba(243,236,224,.88)}.v3 .note{color:rgba(243,236,224,.7)}
+.v3 .pill{background:#C49A5A;color:#111}.v3 .btn{background:#F3ECE0;color:#111}.v3 .btn.ghost{background:transparent;color:#F3ECE0;border-color:#F3ECE0}
+.v3 .art img{width:100%;display:block;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.v3 .mosaic{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:760px){.v3{grid-template-columns:1fr;padding:0 20px 32px}.v3 .art{order:-1;margin:0 -20px}.v3 .art img{box-shadow:none}.v3 .mosaic{gap:0}}
+.grid .card{background:transparent;border:0;border-radius:0}.grid .card img{border-radius:0}.grid .card div{padding:12px 2px 6px}
+.grid .card b{font-family:"Noto Serif TC","Songti TC",serif;font-weight:900}
+.shots img{border-radius:0;border:0}
 </style>
 </head><body><div class="wrap">
 <header><a class="logo" href="/">LZI LAB<small>LZI 工具所</small></a>
