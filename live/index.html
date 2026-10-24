@@ -206,6 +206,7 @@ function loop(t) { if (full) draw(big, t); else draw(pv, t); requestAnimationFra
 requestAnimationFrame(loop);
 
 async function enter() {
+  if (window.gtag) gtag("event", "live_fullscreen", { mode: st.m, color: COLORS[st.c][0] });   // GA4：有多少人真的舉起來
   full = true; stage.style.display = "block"; $("#hint").style.opacity = 1;
   setTimeout(() => $("#hint").style.opacity = 0, 2500);
   try { await (stage.requestFullscreen || stage.webkitRequestFullscreen).call(stage); } catch (e) {}
@@ -227,6 +228,7 @@ function link() {
 }
 function toast(m) { const t = $("#toast"); t.textContent = m; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2200); }
 $("#share").onclick = async () => {
+  if (window.gtag) gtag("event", "live_share");
   const url = link();
   if (navigator.share) { try { await navigator.share({ title: "一起舉這面燈牌", text: `「${st.t}」點開就能全螢幕舉起來`, url }); return; } catch (e) { if (e.name === "AbortError") return; } }
   try { await navigator.clipboard.writeText(url); toast("連結已複製，貼給朋友就好"); } catch (e) { prompt("複製這個連結傳給朋友：", url); }
