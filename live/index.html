@@ -193,7 +193,7 @@ function draw(cv, t) {
       const lit = on && j >= 0 && j < R && bi >= 0 && bi < bitmap.cols && bitmap.data[j * bitmap.cols + bi];
       const cx = i * cell + half, cy = y0 + jj * cell + half;
       if (lit) {
-        const c = col === "rainbow" ? rainbow[(i + Math.floor(t / 60)) % 24] : col;
+        const c = col === "rainbow" ? rainbow[Math.floor(i / 3 + t / 140) % 24] : col;
         x.drawImage(sprite(c, sz), cx - cell, cy - cell, cell * 2, cell * 2);
       } else { x.globalAlpha = 0.55; x.drawImage(dim, cx - r * 0.7, cy - r * 0.7, r * 1.4, r * 1.4); x.globalAlpha = 1; }
     }
