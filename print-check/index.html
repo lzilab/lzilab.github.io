@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>印出來會不會糊？免費圖片解析度檢查｜LZI 工具所</title>
+<meta name="description" content="免費線上解析度檢查：丟一張圖，馬上知道能印多大、名片／A4／海報／T-shirt 會不會糊，還會提醒是不是 IG、LINE 壓縮過的圖。圖片不上傳。"><meta name="keywords" content="解析度檢查,dpi 計算,圖片能印多大,印刷解析度,300dpi,海報解析度,印出來會糊">
+<link rel="canonical" href="https://lzilab.github.io/print-check/"><link rel="icon" href="/img/favicon.png">
+<meta property="og:type" content="website"><meta property="og:title" content="印出來會不會糊？免費圖片解析度檢查｜LZI 工具所">
+<meta property="og:description" content="免費線上解析度檢查：丟一張圖，馬上知道能印多大、名片／A4／海報／T-shirt 會不會糊，還會提醒是不是 IG、LINE 壓縮過的圖。圖片不上傳。"><meta property="og:url" content="https://lzilab.github.io/print-check/">
+<meta property="og:image" content="https://lzilab.github.io/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#111;--paper:#F2EFE6;--signal:#F0B429;--gray:#6b6f78;--card:#fff;--line:#d9d4c7}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 -apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+a{color:inherit}.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.logo{font:900 20px/1 "Avenir Next","Helvetica Neue",sans-serif;letter-spacing:.02em;text-decoration:none}
+.logo small{font:500 13px/1 -apple-system,"PingFang TC",sans-serif;color:var(--gray);margin-left:8px}
+nav a{font-size:14px;margin-left:16px;text-decoration:none;color:var(--gray)}
+.pill{display:inline-block;background:var(--signal);color:var(--ink);font:700 12px/1 sans-serif;padding:6px 10px;border-radius:99px;letter-spacing:.05em}
+h1,h2{font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;line-height:1.25;margin:.4em 0}
+h1{font-size:clamp(32px,6vw,56px)}h2{font-size:clamp(24px,4vw,34px);margin-top:1.6em}
+.hero{padding:48px 0 24px}.lead{font-size:18px;color:#333;max-width:640px}
+.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;padding:14px 26px;border-radius:12px;margin:8px 10px 8px 0}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin:24px 0}
+.card{background:var(--card);border-radius:16px;overflow:hidden;text-decoration:none;display:block;border:1px solid var(--line)}
+.card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}
+.card div{padding:14px 16px}.card b{font-size:18px}.card p{margin:4px 0 0;color:var(--gray);font-size:14px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:20px 0}
+.shots img{width:100%;border-radius:14px;display:block;border:1px solid var(--line)}
+ul.uses{padding-left:1.2em}details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0}
+summary{font-weight:700;cursor:pointer}footer{margin:56px 0 0;padding:24px 0 40px;border-top:1px solid var(--line);color:var(--gray);font-size:14px}
+.note{font-size:14px;color:var(--gray)}
+/* 10/24 v3：色帶＋主視覺（同 IG 概念海報） */
+.v3{background:var(--hc,#1f242c);color:#F3ECE0;margin:0 -20px;padding:40px 20px 36px;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+.v3 h1{color:#F3ECE0;margin-top:.2em;font-size:clamp(30px,4.2vw,46px);word-break:keep-all}.v3 .lead{color:rgba(243,236,224,.88)}.v3 .note{color:rgba(243,236,224,.7)}
+.v3 .pill{background:#C49A5A;color:#111}.v3 .btn{background:#F3ECE0;color:#111}.v3 .btn.ghost{background:transparent;color:#F3ECE0;border-color:#F3ECE0}
+.v3 .art img{width:100%;display:block;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.v3 .mosaic{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:760px){.v3{grid-template-columns:1fr;padding:0 20px 32px}.v3 .art{order:-1;margin:0 -20px}.v3 .art img{box-shadow:none}.v3 .mosaic{gap:0}}
+.grid .card{background:transparent;border:0;border-radius:0}.grid .card img{border-radius:0}.grid .card div{padding:12px 2px 6px}
+.grid .card b{font-family:"Noto Serif TC","Songti TC",serif;font-weight:900}
+.shots img{border-radius:0;border:0}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "LZI 解析度檢查", "applicationCategory": "DesignApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "url": "https://lzilab.github.io/print-check/"}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KGMBH7LNHQ"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-KGMBH7LNHQ');</script></head><body><div class="wrap">
+<header><a class="logo" href="/">LZI LAB<small>LZI 工具所</small></a>
+<nav><a href="/#tools">工具</a><a href="https://portaly.cc/lzilabtools" rel="noopener">完整版</a></nav></header>
+<!-- 10/28 業務打法 #27 免費工具當業務：解析度檢查器（build_site.py 包進 page()，全部在瀏覽器算） -->
+<style>
+.pc-drop{display:block;border:2px dashed var(--ink);border-radius:16px;padding:34px 18px;text-align:center;cursor:pointer;background:#fff;margin:18px 0}
+.pc-drop b{font-size:20px}.pc-drop input{display:none}
+.pc-head{display:grid;grid-template-columns:160px 1fr;gap:18px;align-items:center;margin:18px 0}
+.pc-head img{width:160px;height:160px;object-fit:contain;background:#fff;border:1px solid var(--line)}
+.pc-big{font:900 clamp(22px,4vw,30px)/1.3 "Noto Serif TC","Songti TC",serif}
+.pc-warn{background:#fff4d6;border-left:4px solid var(--signal);padding:10px 14px;margin:10px 0;font-size:15px}
+table.pc{width:100%;border-collapse:collapse;background:#fff;font-size:15px}
+table.pc th,table.pc td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left}
+.ok{color:#17803d;font-weight:700}.mid{color:#b06a00;font-weight:700}.bad{color:#c0262d;font-weight:700}
+@media(max-width:560px){.pc-head{grid-template-columns:96px 1fr}.pc-head img{width:96px;height:96px}table.pc{font-size:13px}table.pc th,table.pc td{padding:8px 4px}}
+</style>
+<section class="hero"><span class="pill">免費線上工具</span>
+<h1>印出來會不會糊？</h1>
+<p class="lead">丟一張圖進來，馬上告訴你：能印多大、名片／A4／海報／T-shirt 各會不會糊、要跟對方要什麼檔案。</p>
+<label class="pc-drop"><input type="file" id="pcf" accept="image/*"><b>選一張圖片</b><br><span class="note">或把圖片拖進來。圖片只在你的瀏覽器裡讀尺寸，不會上傳。</span></label>
+</section>
+<div id="pcr" hidden>
+<div class="pc-head"><img id="pci" alt="你的圖片"><div><div class="note" id="pcpx"></div><div class="pc-big" id="pcmax"></div><div class="note" id="pcmax2"></div></div></div>
+<div id="pcw"></div>
+<table class="pc"><thead><tr><th>要印成</th><th>尺寸</th><th>實際解析度</th><th>結果</th></tr></thead><tbody id="pct"></tbody></table>
+<p class="note">「實際解析度」＝把圖片撐滿那個尺寸（多的裁掉）時，每英吋有幾個像素（dpi）。拿在手上看的東西要 300，海報站遠看 150 就夠。</p>
+</div>
+<h2>解析度不夠怎麼辦</h2>
+<ol><li><b>跟對方要原檔</b>：IG、FB、LINE 傳過的圖都被壓縮過。LINE 傳圖時選「原始畫質」，或用雲端硬碟傳。</li>
+<li><b>印小一點</b>：上面表格綠色的尺寸都可以放心印。</li>
+<li><b>不要用「放大」硬撐</b>：一般放大只是把糊的地方變大。AI 放大會「猜」細節，人臉和文字常被改掉，印之前要放大檢查。</li>
+<li><b>改成網點風格</b>：網點本來就是一顆一顆的，低解析的照片轉成網點反而變成印刷質感。<a href="/halftone/">免費照片轉網點 →</a></li></ol>
+<h2>常見問題</h2>
+<details><summary>dpi 要設多少？</summary><p>名片、明信片、相片、手幅這種拿在手上看的：300。A3 以上海報：150–200。大型看板、帆布：72–100 也可以。印刷廠說「300 dpi」通常是指成品尺寸下要有 300，不是檔案屬性裡那個數字。</p></details>
+<details><summary>檔案屬性寫 72 dpi，是不是不能印？</summary><p>不一定。那個數字只是標籤，真正決定能印多大的是「像素」。這個工具只看像素，所以結果比看屬性準。</p></details>
+<details><summary>手機截圖可以印嗎？</summary><p>截圖大約 1170×2532 像素，印名片、小卡還可以，明信片近看會有點糊，A4 就會糊。要印請用原始照片。</p></details>
+<details><summary>A4、A3 是多大？開數又是什麼？</summary><p>A4＝21×29.7 cm，A3＝29.7×42 cm。台灣印刷廠常講的菊八開、四開請看 <a href="/learn/paper-size-kai/">紙張開數對照</a>。</p></details>
+<script>
+(() => {
+  const SIZES = [  // [名稱, 長邊 cm, 短邊 cm, 清楚所需 dpi]
+    ["名片", 9, 5.4, 300], ["4×6 相片", 15.2, 10.2, 300], ["明信片 A6", 14.8, 10.5, 300],
+    ["A5 傳單", 21, 14.8, 300], ["A4 手幅／傳單", 29.7, 21, 300], ["A3 海報", 42, 29.7, 200],
+    ["A2 海報", 59.4, 42, 150], ["A1 海報", 84.1, 59.4, 150], ["T-shirt 正面印花", 40, 30, 200],
+    ["帆布袋印花", 35, 30, 200], ["IG 貼文（螢幕）", 1350, 1080, 0]];
+  const $ = id => document.getElementById(id), cm = (px, dpi) => (px / dpi * 2.54).toFixed(1);
+  function show(file) {
+    if (!file || !file.type.startsWith("image/")) return;
+    const url = URL.createObjectURL(file), im = new Image();
+    im.onerror = () => alert("這個格式瀏覽器讀不了（例如 iPhone 的 HEIC）。請先轉成 JPG 或 PNG，或用 iPhone 的「分享 → 儲存影像」再選一次。");
+    im.onload = () => {
+      const w = im.naturalWidth, h = im.naturalHeight, L = Math.max(w, h), S = Math.min(w, h);
+      $("pci").src = url; $("pcr").hidden = false;
+      $("pcpx").textContent = `${w} × ${h} 像素（${(w * h / 1e6).toFixed(1)} 百萬畫素）`;
+      $("pcmax").textContent = `清楚印最大 ${cm(L, 300)} × ${cm(S, 300)} cm`;
+      $("pcmax2").textContent = `海報站遠看（150 dpi）可到 ${cm(L, 150)} × ${cm(S, 150)} cm`;
+      const warn = [];
+      if (L === 1080 || L === 1350 || S === 1080) warn.push("寬或高剛好 1080／1350，很像是從 IG 存下來的圖（IG 會壓到這個大小）。要印請跟對方要原檔。");
+      else if (L === 2048 || L === 960) warn.push("尺寸像是被 FB 或聊天軟體壓縮過。要印請跟對方要原檔（LINE 傳圖選「原始畫質」）。");
+      if (Math.abs(L / S - 2.165) < 0.02 && S <= 1320) warn.push("這個比例很像手機截圖。截圖只適合印小張，要印請用原始照片。");
+      if (L < 1000) warn.push("像素很少，連 4×6 相片都會糊。");
+      $("pcw").innerHTML = warn.map(t => `<div class="pc-warn">${t}</div>`).join("");
+      $("pct").innerHTML = SIZES.map(([n, a, b, need]) => {
+        if (!need) {  // 螢幕用：看像素夠不夠 1080 寬
+          const ok = S >= 1080; return `<tr><td>${n}</td><td>1080×1350 px</td><td>—</td><td class="${ok ? "ok" : "mid"}">${ok ? "夠" : "會被放大，略糊"}</td></tr>`;
+        }
+        const dpi = Math.round(Math.min(L / a, S / b) * 2.54);
+        const [c, t] = dpi >= need ? ["ok", "清楚"] : dpi >= need * 0.66 ? ["mid", "近看會有點糊"] : ["bad", "會糊"];
+        return `<tr><td>${n}</td><td>${b}×${a} cm</td><td>${dpi} dpi</td><td class="${c}">${t}</td></tr>`;
+      }).join("");
+      $("pcr").scrollIntoView({behavior: "smooth", block: "start"});
+    };
+    im.src = url;
+  }
+  $("pcf").onchange = e => show(e.target.files[0]);
+  addEventListener("dragover", e => e.preventDefault());
+  addEventListener("drop", e => { e.preventDefault(); show(e.dataTransfer.files[0]); });
+})();
+</script>
+<a href="https://portaly.cc/lzilabtools" rel="noopener" style="display:block;margin:28px 0;padding:16px 18px;border-radius:14px;background:#14141c;color:#f3ece0;text-decoration:none;border:1px solid #c49a5a"><b style="font-size:18px">要印的東西，我們幫你做好</b><br><span style="opacity:.8">應援手幅、燈牌字卡、小店菜單：直接給你能印的高解析檔案。看商店 →</span></a>
+
+<footer>LZI 工具所｜把照片變成印刷品的工具所<br>不用 PS・打開就能用・照片不會上傳，全部在你的瀏覽器裡處理<br>
+IG／Threads：<a href="https://www.instagram.com/lzilab.tools/" rel="noopener">@lzilab.tools</a>　商店：<a href="https://portaly.cc/lzilabtools" rel="noopener">portaly.cc/lzilabtools</a></footer>
+</div></body></html>

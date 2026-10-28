@@ -47,6 +47,7 @@ h2{font-size:19px;margin:28px 0 8px}
 .faq p{margin:4px 0 12px;color:#d8d2c6;font-size:15px}
 .faq b{color:var(--fg)}
 footer{margin-top:30px;color:var(--mute);font-size:13px}
+#paper[hidden]{display:none}
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:#111;padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:20}
 #toast.show{opacity:1}
 #stage{position:fixed;inset:0;background:#000;display:none;z-index:10;touch-action:none}
@@ -81,6 +82,7 @@ footer{margin-top:30px;color:var(--mute);font-size:13px}
   </div>
 
   <div class="up">
+    <a class="hot" id="paper" hidden target="_blank" rel="noopener"><b>這場的紙本手幅（免費 A4 PDF）</b><span>不能帶電子產品、手機沒電也能舉：白底網點很省墨，超商就能印，兩張背對背貼起來就是正反兩面。</span></a>
     <a class="hot" href="https://portaly.cc/lzilabtools/product/Ww4qsalem1sIYuN4inTH"><b>懶得弄？應援燈牌代做 NT$99</b><span>給我字和顏色，24 小時內交手機直式 MP4，放相簿隨時開。</span></a>
     <a href="https://portaly.cc/lzilabtools/product/HEZhXPU53VEwsB2gBcwc"><b>要做影片、限動、海報：LZI 燈牌機完整版</b><span>9 種燈色、直式／橫式 MP4、照片也能變燈牌，高解析無浮水印。早鳥 NT$149 到 12/31。</span></a>
     <a href="/led-board/"><b>先試完整功能（免費試用版）</b><span>LED 跑馬燈產生器：輸出圖片和影片。</span></a>
@@ -112,6 +114,9 @@ const st = { t: "今晚我們一起唱", c: 0, m: "scroll", s: 5, r: 24 };
 // 讀分享連結 #t=…&c=…&m=…&s=…&r=…
 (function () {
   if (!location.hash) return;
+  const PAPER = {"skz": "https://drive.google.com/open?id=1DApuB7FZaAZcWOWPsdPxtJv8cAxVRJ6D"};   // build_site.py 從 live_links.json 填入（10/28 每場演唱會免費應援包）
+  const pp = PAPER[new URLSearchParams(location.search).get("src")];
+  if (pp) { const a = document.getElementById("paper"); a.href = pp; a.hidden = false; }
   const q = new URLSearchParams(location.hash.slice(1));
   if (q.get("t")) { st.t = q.get("t").slice(0, 30); $("#shared").style.display = "block"; }
   const c = +q.get("c"); if (c >= 0 && c < COLORS.length) st.c = c;
