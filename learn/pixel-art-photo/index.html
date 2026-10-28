@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>像素風照片怎麼做？照片轉像素畫、馬賽克效果教學｜LZI 工具所</title>
+<meta name="description" content="像素風照片就是把照片切成一格一格的色塊，看起來像老遊戲畫面。這篇講像素跟馬賽克的關係、哪種照片轉起來好看、格子大小和顏色怎麼調，用網點印刷機的馬賽克風格做，還有做好之後拿去發 IG、做貼紙、印出來要注意的地方。"><meta name="keywords" content="像素風照片,照片轉像素畫,像素風,馬賽克效果,pixel art 照片,照片變像素,點陣圖風">
+<link rel="canonical" href="https://lzilab.github.io/learn/pixel-art-photo/"><link rel="icon" href="/img/favicon.png">
+<meta property="og:type" content="website"><meta property="og:title" content="像素風照片怎麼做？照片轉像素畫、馬賽克效果教學｜LZI 工具所">
+<meta property="og:description" content="像素風照片就是把照片切成一格一格的色塊，看起來像老遊戲畫面。這篇講像素跟馬賽克的關係、哪種照片轉起來好看、格子大小和顏色怎麼調，用網點印刷機的馬賽克風格做，還有做好之後拿去發 IG、做貼紙、印出來要注意的地方。"><meta property="og:url" content="https://lzilab.github.io/learn/pixel-art-photo/">
+<meta property="og:image" content="https://lzilab.github.io/img/learn_pixel-art-photo_1.jpg"><meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#111;--paper:#F2EFE6;--signal:#F0B429;--gray:#6b6f78;--card:#fff;--line:#d9d4c7}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 -apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+a{color:inherit}.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.logo{font:900 20px/1 "Avenir Next","Helvetica Neue",sans-serif;letter-spacing:.02em;text-decoration:none}
+.logo small{font:500 13px/1 -apple-system,"PingFang TC",sans-serif;color:var(--gray);margin-left:8px}
+nav a{font-size:14px;margin-left:16px;text-decoration:none;color:var(--gray)}
+.pill{display:inline-block;background:var(--signal);color:var(--ink);font:700 12px/1 sans-serif;padding:6px 10px;border-radius:99px;letter-spacing:.05em}
+h1,h2{font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;line-height:1.25;margin:.4em 0}
+h1{font-size:clamp(32px,6vw,56px)}h2{font-size:clamp(24px,4vw,34px);margin-top:1.6em}
+.hero{padding:48px 0 24px}.lead{font-size:18px;color:#333;max-width:640px}
+.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;padding:14px 26px;border-radius:12px;margin:8px 10px 8px 0}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin:24px 0}
+.card{background:var(--card);border-radius:16px;overflow:hidden;text-decoration:none;display:block;border:1px solid var(--line)}
+.card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}
+.card div{padding:14px 16px}.card b{font-size:18px}.card p{margin:4px 0 0;color:var(--gray);font-size:14px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:20px 0}
+.shots img{width:100%;border-radius:14px;display:block;border:1px solid var(--line)}
+ul.uses{padding-left:1.2em}details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0}
+summary{font-weight:700;cursor:pointer}footer{margin:56px 0 0;padding:24px 0 40px;border-top:1px solid var(--line);color:var(--gray);font-size:14px}
+.note{font-size:14px;color:var(--gray)}
+/* 10/24 v3：色帶＋主視覺（同 IG 概念海報） */
+.v3{background:var(--hc,#1f242c);color:#F3ECE0;margin:0 -20px;padding:40px 20px 36px;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+.v3 h1{color:#F3ECE0;margin-top:.2em;font-size:clamp(30px,4.2vw,46px);word-break:keep-all}.v3 .lead{color:rgba(243,236,224,.88)}.v3 .note{color:rgba(243,236,224,.7)}
+.v3 .pill{background:#C49A5A;color:#111}.v3 .btn{background:#F3ECE0;color:#111}.v3 .btn.ghost{background:transparent;color:#F3ECE0;border-color:#F3ECE0}
+.v3 .art img{width:100%;display:block;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.v3 .mosaic{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:760px){.v3{grid-template-columns:1fr;padding:0 20px 32px}.v3 .art{order:-1;margin:0 -20px}.v3 .art img{box-shadow:none}.v3 .mosaic{gap:0}}
+.grid .card{background:transparent;border:0;border-radius:0}.grid .card img{border-radius:0}.grid .card div{padding:12px 2px 6px}
+.grid .card b{font-family:"Noto Serif TC","Songti TC",serif;font-weight:900}
+.shots img{border-radius:0;border:0}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "像素風照片怎麼做：照片變成一格一格的方塊，格子大小其實決定一切", "description": "像素風照片就是把照片切成一格一格的色塊，看起來像老遊戲畫面。這篇講像素跟馬賽克的關係、哪種照片轉起來好看、格子大小和顏色怎麼調，用網點印刷機的馬賽克風格做，還有做好之後拿去發 IG、做貼紙、印出來要注意的地方。", "image": "https://lzilab.github.io/img/learn_pixel-art-photo_1.jpg", "author": {"@type": "Organization", "name": "LZI 工具所"}, "inLanguage": "zh-Hant-TW"}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KGMBH7LNHQ"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-KGMBH7LNHQ');</script></head><body><div class="wrap">
+<header><a class="logo" href="/">LZI LAB<small>LZI 工具所</small></a>
+<nav><a href="/#tools">工具</a><a href="https://portaly.cc/lzilabtools" rel="noopener">完整版</a></nav></header>
+<section class="hero"><span class="pill">風格教學</span><h1>像素風照片怎麼做：照片變成一格一格的方塊，格子大小其實決定一切</h1>
+<img src="/img/learn_pixel-art-photo_1.jpg" alt="像素風照片怎麼做：照片變成一格一格的方塊，格子大小其實決定一切" style="width:100%;max-width:560px;border-radius:14px;border:1px solid var(--line);display:block"></section>
+<h2>像素風是什麼</h2><p>把一張照片切成很多小方格，每一格只留一個顏色，整張圖就會變成一塊一塊的樣子。離遠看還認得出是誰，靠近看全是方塊，這就是大家說的像素風。</p><p>很多人第一個聯想到的是老遊戲。任天堂的紅白機 1983 年在日本推出，畫面只有 256×240 個像素，角色只能用幾十格畫出來，所以每一格都很明顯。現在螢幕細到看不見像素了，反而有人特地把照片做回這種粗格子，因為它有一種懷舊又可愛的感覺。</p><img src="/img/learn_pixel-art-photo_1.jpg" alt="像素風是什麼" loading="lazy" style="width:100%;max-width:560px;border-radius:14px;border:1px solid var(--line);display:block"><h2>像素和馬賽克，其實是同一個想法</h2><p>pixel 一般說是 picture element 的縮寫，意思是畫面裡最小的那一格。這個字 1965 年才正式出現在出版品上，但「用小格子拼出一張圖」這件事早就有了：古代的馬賽克地板是用小石塊、小磁磚一塊一塊拼的。</p><p>所以中文常把像素風跟「馬賽克效果」混著講。只是大家平常說的打馬賽克，是為了遮住臉或車牌；像素風是故意讓整張照片變成方塊，還要讓人看得出原本是什麼。這兩種用途剛好相反，挺有趣的。</p><h2>哪種照片轉起來好看</h2><p>像素風會吃掉細節，所以照片越單純越好。我覺得最適合的是三種：一個人或一隻寵物的大頭照、背景乾淨的物品、顏色對比強的街景。</p><p>不適合的是遠遠拍的團體照，每張臉只剩幾格，轉完就是一團色塊。主角佔畫面一半以上最保險。如果背景很亂，先裁切一下，把主角放大，轉出來會差很多。</p><h2>用網點印刷機的馬賽克風格做</h2><p>網點印刷機有 12 種風格，其中一種就叫「馬賽克」。它會把照片切成方格，每格保留原本的顏色，格子中間有黑色的縫，看起來有點像磁磚拼貼。照片丟進去選這個風格就能轉，不會用 AI 重畫你的臉，五官的位置和顏色都是照原照片來的。</p><p>想要更像遊戲畫面，就把點的大小調到 30 以上，格子變大，像素感會一下子出來。想要細一點、還看得出表情，就調小。同一張照片可以多試幾個數字，放在手機上比一比再決定。</p><img src="/img/learn_pixel-art-photo_2.jpg" alt="用網點印刷機的馬賽克風格做" loading="lazy" style="width:100%;max-width:560px;border-radius:14px;border:1px solid var(--line);display:block"><h2>格子大小、顏色怎麼抓</h2><p>格子大小沒有標準答案，看你要拿去哪裡用。手機上看的圖，格子可以大一點，縮小顯示時還是看得出方塊；要印成 A4、A3 的海報，格子太小的話印出來就跟普通照片差不多，失去像素風的意思。</p><p>顏色的部分，照片本身顏色越飽和，轉出來越像遊戲。灰灰的陰天照片轉完會偏暗，可以先在手機相簿把亮度和飽和度拉高一點再丟進去。</p><p>如果你想要的是更手作的感覺，可以順便試試「十字繡」風格，一樣是格子，但每格變成一個交叉針腳。</p><img src="/img/learn_pixel-art-photo_3.jpg" alt="格子大小、顏色怎麼抓" loading="lazy" style="width:100%;max-width:560px;border-radius:14px;border:1px solid var(--line);display:block"><h2>做好之後拿去用</h2><p>像素風很適合當 IG 頭貼、限動背景，也可以做成貼紙。貼紙通常不大，格子就要調大，不然剪下來看不出效果。要印海報的話，存成高解析度的檔案，用 300 dpi 去抓尺寸，印出來的格子邊緣才會乾淨。</p><p>另外一個小提醒：轉換是照原圖算的，原圖如果很糊，格子再大也救不回來，拍的時候對焦清楚就好。</p><p>12 種風格各長什麼樣子、適合什麼照片，可以看〈印刷風格有哪些？12 種一次看懂〉那篇，挑一兩種跟像素風搭著用也很好玩。</p>
+<h2>想把自己的照片做成這種印刷感？</h2><p>網點印刷機免費試用：照片丟進去，12 種印刷風格點一下就換，手機也能用。</p>
+<a class="btn" href="/halftone/app.html">免費開始使用</a><a class="btn ghost" href="/halftone/">看網點印刷機</a><div style="border:1.5px solid var(--ink);border-radius:14px;padding:18px 20px;margin:22px 0;max-width:560px">
+<b style="font-size:1.1em">網點印刷機 完整版　早鳥 NT$149</b><span style="opacity:.6">（原價 NT$199，早鳥到 12/31）</span>
+<ul style="margin:10px 0 6px 1.1em;padding:0"><li>沒有浮水印、輸出高解析（試用版限 720p）</li><li>可匯出 SVG 向量檔，印 T 恤、貼紙、雷雕都清楚</li><li>手機直接用線上完整版，電腦也能下載，不用裝軟體</li></ul>
+<a class="btn" href="https://portaly.cc/lzilabtools/product/B6ajzaEGnCbhc77wRAcp">買完整版 NT$149</a><a class="btn ghost" href="https://portaly.cc/lzilabtools/product/7108lzYOkqelAfQdpceN">5 支工具全買：通行證 NT$490</a></div>
+<footer>LZI 工具所｜把照片變成印刷品的工具所<br>不用 PS・打開就能用・照片不會上傳，全部在你的瀏覽器裡處理<br>
+IG／Threads：<a href="https://www.instagram.com/lzilab.tools/" rel="noopener">@lzilab.tools</a>　商店：<a href="https://portaly.cc/lzilabtools" rel="noopener">portaly.cc/lzilabtools</a></footer>
+</div></body></html>
