@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>演唱會手機應援燈牌怎麼做？LED 燈牌教學｜LZI 工具所</title>
+<meta name="description" content="演唱會想用手機應援，又不想跟旁邊的人用同一個跑馬燈 App 的樣子？這篇講怎麼用我們的燈牌機把應援字或照片做成 LED 燈牌，字怎麼打遠遠才看得清楚、手機怎麼設定，還有印成紙本手幅要注意什麼。"><meta name="keywords" content="手機跑馬燈,演唱會應援,應援燈牌,LED跑馬燈,應援手幅,跑馬燈影片,應援牌製作">
+<link rel="canonical" href="https://lzilab.github.io/learn/phone-led-banner/"><link rel="icon" href="/img/favicon.png">
+<meta property="og:type" content="website"><meta property="og:title" content="演唱會手機應援燈牌怎麼做？LED 燈牌教學｜LZI 工具所">
+<meta property="og:description" content="演唱會想用手機應援，又不想跟旁邊的人用同一個跑馬燈 App 的樣子？這篇講怎麼用我們的燈牌機把應援字或照片做成 LED 燈牌，字怎麼打遠遠才看得清楚、手機怎麼設定，還有印成紙本手幅要注意什麼。"><meta property="og:url" content="https://lzilab.github.io/learn/phone-led-banner/">
+<meta property="og:image" content="https://lzilab.github.io/img/learn_phone-led-banner_1.jpg"><meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#111;--paper:#F2EFE6;--signal:#F0B429;--gray:#6b6f78;--card:#fff;--line:#d9d4c7}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 -apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+a{color:inherit}.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.logo{font:900 20px/1 "Avenir Next","Helvetica Neue",sans-serif;letter-spacing:.02em;text-decoration:none}
+.logo small{font:500 13px/1 -apple-system,"PingFang TC",sans-serif;color:var(--gray);margin-left:8px}
+nav a{font-size:14px;margin-left:16px;text-decoration:none;color:var(--gray)}
+.pill{display:inline-block;background:var(--signal);color:var(--ink);font:700 12px/1 sans-serif;padding:6px 10px;border-radius:99px;letter-spacing:.05em}
+h1,h2{font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;line-height:1.25;margin:.4em 0}
+h1{font-size:clamp(32px,6vw,56px)}h2{font-size:clamp(24px,4vw,34px);margin-top:1.6em}
+.hero{padding:48px 0 24px}.lead{font-size:18px;color:#333;max-width:640px}
+.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;padding:14px 26px;border-radius:12px;margin:8px 10px 8px 0}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin:24px 0}
+.card{background:var(--card);border-radius:16px;overflow:hidden;text-decoration:none;display:block;border:1px solid var(--line)}
+.card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}
+.card div{padding:14px 16px}.card b{font-size:18px}.card p{margin:4px 0 0;color:var(--gray);font-size:14px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:20px 0}
+.shots img{width:100%;border-radius:14px;display:block;border:1px solid var(--line)}
+ul.uses{padding-left:1.2em}details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0}
+summary{font-weight:700;cursor:pointer}footer{margin:56px 0 0;padding:24px 0 40px;border-top:1px solid var(--line);color:var(--gray);font-size:14px}
+.note{font-size:14px;color:var(--gray)}
+/* 10/24 v3：色帶＋主視覺（同 IG 概念海報） */
+.v3{background:var(--hc,#1f242c);color:#F3ECE0;margin:0 -20px;padding:40px 20px 36px;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+.v3 h1{color:#F3ECE0;margin-top:.2em;font-size:clamp(30px,4.2vw,46px);word-break:keep-all}.v3 .lead{color:rgba(243,236,224,.88)}.v3 .note{color:rgba(243,236,224,.7)}
+.v3 .pill{background:#C49A5A;color:#111}.v3 .btn{background:#F3ECE0;color:#111}.v3 .btn.ghost{background:transparent;color:#F3ECE0;border-color:#F3ECE0}
+.v3 .art img{width:100%;display:block;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.v3 .mosaic{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:760px){.v3{grid-template-columns:1fr;padding:0 20px 32px}.v3 .art{order:-1;margin:0 -20px}.v3 .art img{box-shadow:none}.v3 .mosaic{gap:0}}
+.grid .card{background:transparent;border:0;border-radius:0}.grid .card img{border-radius:0}.grid .card div{padding:12px 2px 6px}
+.grid .card b{font-family:"Noto Serif TC","Songti TC",serif;font-weight:900}
+.shots img{border-radius:0;border:0}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "演唱會手機應援怎麼做：打幾個字，就變 LED 應援燈牌", "description": "演唱會想用手機應援，又不想跟旁邊的人用同一個跑馬燈 App 的樣子？這篇講怎麼用我們的燈牌機把應援字或照片做成 LED 燈牌，字怎麼打遠遠才看得清楚、手機怎麼設定，還有印成紙本手幅要注意什麼。", "image": "https://lzilab.github.io/img/learn_phone-led-banner_1.jpg", "author": {"@type": "Organization", "name": "LZI 工具所"}, "inLanguage": "zh-Hant-TW"}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KGMBH7LNHQ"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-KGMBH7LNHQ');</script></head><body><div class="wrap">
+<header><a class="logo" href="/">LZI LAB<small>LZI 工具所</small></a>
+<nav><a href="/#tools">工具</a><a href="https://portaly.cc/lzilabtools" rel="noopener">完整版</a></nav></header>
+<section class="hero"><span class="pill">工具教學</span><h1>演唱會手機應援怎麼做：打幾個字，就變 LED 應援燈牌</h1>
+<img src="/img/learn_phone-led-banner_1.jpg" alt="演唱會手機應援怎麼做：打幾個字，就變 LED 應援燈牌" style="width:100%;max-width:560px;border-radius:14px;border:1px solid var(--line);display:block"></section>
+<h2>演唱會想舉手機應援</h2><p>手機大概是最輕便的應援方式，不用帶燈牌、不用充電池，舉起來就有。很多人會用跑馬燈 App，只是現成的 App 很多長得差不多，字型、顏色都是那幾種，整排看過去分不太出是誰。</p><p>我們做燈牌機，是想讓應援的字可以自己決定。打字或放照片進去，出來就是 LED 燈牌的樣子，存進手機打開就能舉。</p><h2>燈牌機能做什麼</h2><p>燈牌機的用法就兩種。一種是打字，把名字或應援詞打進去，變成一塊 LED 燈牌。另一種是放照片，偶像的照片、你們的合照都可以，照片也會變成燈牌的樣子。</p><p>其他細節，像有哪些樣式、能輸出什麼格式，請以工具本身和 Portaly 商品頁寫的為準。我這邊就不一條一條列，免得之後工具更新了，兩邊寫的對不起來。</p><img src="/img/learn_phone-led-banner_2.jpg" alt="燈牌機能做什麼" loading="lazy" style="width:100%;max-width:560px;border-radius:14px;border:1px solid var(--line);display:block"><h2>做一張應援燈牌</h2><p>步驟其實很少。先打字，名字或一句短短的應援詞就好，做好就下載，存進手機。</p><p>存好之後先自己打開看一次，字有沒有被切到、直拿手機的時候順不順。到現場要用，全螢幕打開、亮度調到最大，記得把自動鎖定關掉，不然舉到一半螢幕就暗了。</p><img src="/img/learn_phone-led-banner_1.jpg" alt="做一張應援燈牌" loading="lazy" style="width:100%;max-width:560px;border-radius:14px;border:1px solid var(--line);display:block"><h2>字要怎麼打，遠遠才看得清楚</h2><p>場館很大，台上的人跟你距離很遠，所以字越少越好。一個名字、四五個字的短句就夠了。</p><p>字一多，每個字就會變小，遠遠看就糊在一起。真的有很多話想說，拆成兩三張輪流換，會比全部塞在同一張清楚。</p><p>名字裡有筆畫很多的字，最容易糊掉。做好之後把手機放在桌上，人退到房間另一頭看看，看得清楚再帶去現場。</p><h2>除了手機還能拿來做什麼</h2><p>同一組字也能拿去印成紙本手幅，沒電也能舉。要印之前先問影印店或印刷店要多大的檔，A4 用 300 dpi 來算大約要 2480×3508 像素，「印刷解析度 300 dpi 是什麼」那篇有對照表。</p><p>不追星的話，擺攤的招牌、店家限動的公告也很適合，例如「今日公休」「新品上市」做成燈牌的樣子，我覺得比打字截圖有趣一點。</p><img src="/img/learn_phone-led-banner_3.jpg" alt="除了手機還能拿來做什麼" loading="lazy" style="width:100%;max-width:560px;border-radius:14px;border:1px solid var(--line);display:block"><h2>出門前檢查一下</h2><p>每個場館、每個主辦對燈牌和發光物的規定都不太一樣，尺寸、能不能舉高都可能有限制，出發前先看一下活動公告。手機亮度全開很耗電，帶個行動電源真的比較安心。舉的時候也顧一下後面的人，不要一直高舉過頭擋到別人的視線。</p><p>Portaly 上有免費的全工具試用包，裡面就有燈牌機的試用版，可以先做一張看看效果。</p>
+<h2>自己做一張試試</h2><p>燈牌機有免費試用版，手機打開網站就能玩。</p><a class="btn" href="/led-board/app.html">免費開始使用</a><a class="btn ghost" href="/led-board/">看燈牌機</a><div style="border:1.5px solid var(--ink);border-radius:14px;padding:18px 20px;margin:22px 0;max-width:560px"><b style="font-size:1.1em">燈牌機 完整版　早鳥 NT$149</b><span style="opacity:.6">（原價 NT$199，早鳥到 12/31）</span><ul style="margin:10px 0 6px 1.1em;padding:0"><li>沒有浮水印、輸出高解析直式影片</li><li>手機直接用線上完整版</li><li>做好的影片可以商用</li></ul><a class="btn" href="https://portaly.cc/lzilabtools/product/HEZhXPU53VEwsB2gBcwc">買完整版 NT$149</a><a class="btn ghost" href="https://portaly.cc/lzilabtools/product/7108lzYOkqelAfQdpceN">5 支全買 NT$490</a></div>
+<footer>LZI 工具所｜把照片變成印刷品的工具所<br>不用 PS・打開就能用・照片不會上傳，全部在你的瀏覽器裡處理<br>
+IG／Threads：<a href="https://www.instagram.com/lzilab.tools/" rel="noopener">@lzilab.tools</a>　商店：<a href="https://portaly.cc/lzilabtools" rel="noopener">portaly.cc/lzilabtools</a></footer>
+</div></body></html>
