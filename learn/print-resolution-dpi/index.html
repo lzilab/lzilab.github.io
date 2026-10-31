@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>印刷解析度 300 dpi 是什麼？A4、A3 要多少像素｜LZI 工具所</title>
+<meta name="description" content="印刷店說檔案要 300 dpi，到底是什麼意思？這篇我用白話講 dpi 和像素的關係，附 A3、A4、A5、A6 在 300 dpi 需要多少像素的對照，還有手機照片夠不夠印、小圖硬拉大會怎樣、出血要留多少。"><meta name="keywords" content="解析度,300dpi,印刷解析度,dpi是什麼,照片解析度,A4像素,海報解析度">
+<link rel="canonical" href="https://lzilab.github.io/learn/print-resolution-dpi/"><link rel="icon" href="/img/favicon.png">
+<meta property="og:type" content="website"><meta property="og:title" content="印刷解析度 300 dpi 是什麼？A4、A3 要多少像素｜LZI 工具所">
+<meta property="og:description" content="印刷店說檔案要 300 dpi，到底是什麼意思？這篇我用白話講 dpi 和像素的關係，附 A3、A4、A5、A6 在 300 dpi 需要多少像素的對照，還有手機照片夠不夠印、小圖硬拉大會怎樣、出血要留多少。"><meta property="og:url" content="https://lzilab.github.io/learn/print-resolution-dpi/">
+<meta property="og:image" content="https://lzilab.github.io/img/learn_print-resolution-dpi_1.jpg"><meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#111;--paper:#F2EFE6;--signal:#F0B429;--gray:#6b6f78;--card:#fff;--line:#d9d4c7}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 -apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+a{color:inherit}.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.logo{font:900 20px/1 "Avenir Next","Helvetica Neue",sans-serif;letter-spacing:.02em;text-decoration:none}
+.logo small{font:500 13px/1 -apple-system,"PingFang TC",sans-serif;color:var(--gray);margin-left:8px}
+nav a{font-size:14px;margin-left:16px;text-decoration:none;color:var(--gray)}
+.pill{display:inline-block;background:var(--signal);color:var(--ink);font:700 12px/1 sans-serif;padding:6px 10px;border-radius:99px;letter-spacing:.05em}
+h1,h2{font-family:"Noto Serif TC","Songti TC",serif;font-weight:900;line-height:1.25;margin:.4em 0}
+h1{font-size:clamp(32px,6vw,56px)}h2{font-size:clamp(24px,4vw,34px);margin-top:1.6em}
+.hero{padding:48px 0 24px}.lead{font-size:18px;color:#333;max-width:640px}
+.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;padding:14px 26px;border-radius:12px;margin:8px 10px 8px 0}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin:24px 0}
+.card{background:var(--card);border-radius:16px;overflow:hidden;text-decoration:none;display:block;border:1px solid var(--line)}
+.card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}
+.card div{padding:14px 16px}.card b{font-size:18px}.card p{margin:4px 0 0;color:var(--gray);font-size:14px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:20px 0}
+.shots img{width:100%;border-radius:14px;display:block;border:1px solid var(--line)}
+ul.uses{padding-left:1.2em}details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0}
+summary{font-weight:700;cursor:pointer}footer{margin:56px 0 0;padding:24px 0 40px;border-top:1px solid var(--line);color:var(--gray);font-size:14px}
+.note{font-size:14px;color:var(--gray)}
+/* 10/24 v3：色帶＋主視覺（同 IG 概念海報） */
+.v3{background:var(--hc,#1f242c);color:#F3ECE0;margin:0 -20px;padding:40px 20px 36px;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+.v3 h1{color:#F3ECE0;margin-top:.2em;font-size:clamp(30px,4.2vw,46px);word-break:keep-all}.v3 .lead{color:rgba(243,236,224,.88)}.v3 .note{color:rgba(243,236,224,.7)}
+.v3 .pill{background:#C49A5A;color:#111}.v3 .btn{background:#F3ECE0;color:#111}.v3 .btn.ghost{background:transparent;color:#F3ECE0;border-color:#F3ECE0}
+.v3 .art img{width:100%;display:block;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.v3 .mosaic{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:760px){.v3{grid-template-columns:1fr;padding:0 20px 32px}.v3 .art{order:-1;margin:0 -20px}.v3 .art img{box-shadow:none}.v3 .mosaic{gap:0}}
+.grid .card{background:transparent;border:0;border-radius:0}.grid .card img{border-radius:0}.grid .card div{padding:12px 2px 6px}
+.grid .card b{font-family:"Noto Serif TC","Songti TC",serif;font-weight:900}
+.shots img{border-radius:0;border:0}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "印刷解析度要多少？300 dpi 是什麼，手機照片印 A4 夠不夠", "description": "印刷店說檔案要 300 dpi，到底是什麼意思？這篇我用白話講 dpi 和像素的關係，附 A3、A4、A5、A6 在 300 dpi 需要多少像素的對照，還有手機照片夠不夠印、小圖硬拉大會怎樣、出血要留多少。", "image": "https://lzilab.github.io/img/learn_print-resolution-dpi_1.jpg", "author": {"@type": "Organization", "name": "LZI 工具所"}, "inLanguage": "zh-Hant-TW"}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KGMBH7LNHQ"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-KGMBH7LNHQ');</script></head><body><div class="wrap">
+<header><a class="logo" href="/">LZI LAB<small>LZI 工具所</small></a>
+<nav><a href="/#tools">工具</a><a href="https://portaly.cc/lzilabtools" rel="noopener">完整版</a></nav></header>
+<section class="hero"><span class="pill">印刷小知識</span><h1>印刷解析度要多少？300 dpi 是什麼，手機照片印 A4 夠不夠</h1>
+<img src="/img/learn_print-resolution-dpi_1.jpg" alt="印刷解析度要多少？300 dpi 是什麼，手機照片印 A4 夠不夠" style="width:100%;max-width:560px;border-radius:14px;border:1px solid var(--line);display:block"></section>
+<h2>dpi 到底是什麼</h2><p>dpi 是 dots per inch，每一英寸裡有幾個點。螢幕上比較常講 ppi，就是每英寸幾個像素。這兩個詞平常很多人混著用，印刷店跟你說「檔案要 300 dpi」，其實是在問一件事：你的圖有沒有足夠多的像素，印到那個尺寸還是清楚的。</p><p>所以只看 dpi 這個數字沒有意義，要搭配「印多大」一起看。同一張圖印成明信片很清楚，印成大海報可能就糊了。</p><img src="/img/learn_print-resolution-dpi_1.jpg" alt="dpi 到底是什麼" loading="lazy" style="width:100%;max-width:560px;border-radius:14px;border:1px solid var(--line);display:block"><h2>為什麼大家都說 300</h2><p>拿在手上看的印刷品，眼睛距離紙很近，一般認為 300 dpi 左右就很難看出一格一格的像素，所以很多印刷店把它當成標準。</p><p>掛在牆上、遠遠看的大海報，看的距離遠，有些店家可以接受比較低的解析度。每家的標準不一樣，下單前問一句其實最保險。</p><h2>自己算：A4 要多少像素</h2><p>算法其實很簡單：1 英寸是 2.54 公分，把尺寸換成英寸再乘上 300 就好。以 300 dpi 來算，大概是這樣：</p><p>A3（29.7×42 公分）：3508×4961 像素<br>A4（21×29.7 公分）：2480×3508 像素<br>A5（14.8×21 公分）：1748×2480 像素<br>A6（10.5×14.8 公分）：1240×1748 像素</p><p>拿 A4 驗算一次：21 公分是 8.27 英寸，乘 300 差不多 2480。手邊的圖比表上小很多的話，就換一張原圖更大的，或是把要印的尺寸縮小一點。</p><h2>手機照片夠不夠</h2><p>其實多半是夠的。以常見的 1200 萬畫素來說，照片大約 4000×3000 像素，用 300 dpi 換算差不多可以印到 34×25 公分，比 A4 還大一點。</p><p>要小心的是被壓縮過的照片。從 IG 存下來的圖、通訊軟體傳過來的照片，常常已經被縮小了，看起來還好，印出來就不夠。要印的話，記得跟對方要原圖，或是直接用自己手機裡的原檔。</p><h2>小圖硬拉大會怎樣</h2><p>在軟體裡只把 72 改成 300、沒有重新取樣的話，像素數量其實沒變，圖也不會變清楚，只是印出來的尺寸跟著變小。如果勾了重新取樣，硬把像素拉大，軟體只能自己猜中間的顏色，結果就是邊緣軟軟的、有點糊。</p><p>所以要印很大的東西，像大圖輸出、招牌，可以問店家收不收向量檔。向量是用形狀記錄的，沒有像素，放多大都一樣銳利，送印刷店、雷雕、割字都比較放心。網點本身是一顆一顆的圓，很適合做成向量，我們的網點素材 Vol.1 就是 PNG 和 SVG 兩種都有。</p><img src="/img/learn_print-resolution-dpi_2.jpg" alt="小圖硬拉大會怎樣" loading="lazy" style="width:100%;max-width:560px;border-radius:14px;border:1px solid var(--line);display:block"><h2>送印前檢查三件事</h2><p>第一，看像素，對照上面的表，夠不夠你要印的尺寸。第二，問清楚店家要的格式，PDF、PNG 還是 SVG。第三，問要不要留出血，很多印刷店會請你四周多留幾毫米，裁切的時候才不會切到白邊，常見是 3 毫米。</p><p>這三件事確認好，大部分的「印出來怎麼跟螢幕不一樣」其實都可以先避掉。</p>
+<h2>想把自己的照片做成這種印刷感？</h2><p>網點印刷機免費試用：照片丟進去，12 種印刷風格點一下就換，手機也能用。</p>
+<a class="btn" href="/halftone/app.html">免費開始使用</a><a class="btn ghost" href="/halftone/">看網點印刷機</a><div style="border:1.5px solid var(--ink);border-radius:14px;padding:18px 20px;margin:22px 0;max-width:560px">
+<b style="font-size:1.1em">網點印刷機 完整版　早鳥 NT$149</b><span style="opacity:.6">（原價 NT$199，早鳥到 12/31）</span>
+<ul style="margin:10px 0 6px 1.1em;padding:0"><li>沒有浮水印、輸出高解析（試用版限 720p）</li><li>可匯出 SVG 向量檔，印 T 恤、貼紙、雷雕都清楚</li><li>手機直接用線上完整版，電腦也能下載，不用裝軟體</li></ul>
+<a class="btn" href="https://portaly.cc/lzilabtools/product/B6ajzaEGnCbhc77wRAcp">買完整版 NT$149</a><a class="btn ghost" href="https://portaly.cc/lzilabtools/product/7108lzYOkqelAfQdpceN">5 支工具全買：通行證 NT$490</a></div>
+<footer>LZI 工具所｜把照片變成印刷品的工具所<br>不用 PS・打開就能用・照片不會上傳，全部在你的瀏覽器裡處理<br>
+IG／Threads：<a href="https://www.instagram.com/lzilab.tools/" rel="noopener">@lzilab.tools</a>　商店：<a href="https://portaly.cc/lzilabtools" rel="noopener">portaly.cc/lzilabtools</a></footer>
+</div></body></html>
